@@ -19,70 +19,34 @@
 					</div>
 				</div>
 			</div>
-			<div class="-mr-2 flex md:hidden">
-				<!-- Mobile menu button -->
-				<button
-					type="button"
-					class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-					aria-controls="mobile-menu"
-					aria-expanded="false"
+			<label class="relative z-40 cursor-pointer px-3 py-6 md:hidden" for="mobile-menu">
+				<input class="peer hidden" type="checkbox" id="mobile-menu" />
+				<div
+					class="bg-orange before:bg-orange after:bg-orange relative z-50 block h-[1px] w-7 bg-transparent content-[''] before:absolute before:top-[-0.35rem] before:z-50 before:block before:h-full before:w-full before:transition-all before:duration-200 before:ease-out before:content-[''] after:absolute after:bottom-[-0.35rem] after:right-0 after:block after:h-full after:w-full after:transition-all after:duration-200 after:ease-out after:content-[''] peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform"
+				></div>
+				<div
+					class="fixed inset-0 z-40 hidden h-full w-full bg-black/50 backdrop-blur-sm peer-checked:block"
 				>
-					<span class="absolute -inset-0.5"></span>
-					<span class="sr-only">Open main menu</span>
-					<!-- Menu open: "hidden", Menu closed: "block" -->
-					<svg
-						class="block h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						aria-hidden="true"
-						data-slot="icon"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-						/>
-					</svg>
-					<!-- Menu open: "block", Menu closed: "hidden" -->
-					<svg
-						class="hidden h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						aria-hidden="true"
-						data-slot="icon"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-					</svg>
-				</button>
-			</div>
-		</div>
-	</div>
-
-	<!-- Mobile menu, show/hide based on menu state. -->
-	<div class="hidden md:hidden" id="mobile-menu">
-		<div class="space-y-1 px-2 pb-3 pt-2 font-thin text-white sm:px-3">
-			<a
-				href="/about"
-				class="block rounded-md px-3 py-2 text-base hover:bg-gray-700"
-				aria-current="page">About me</a
-			>
-			<a
-				href="/skills"
-				class="block rounded-md px-3 py-2 text-base hover:bg-gray-700 hover:text-white">My Skills</a
-			>
-			<a
-				href="/cases"
-				class="block rounded-md px-3 py-2 text-base hover:bg-gray-700 hover:text-white"
-				>Customer cases</a
-			>
-			<a
-				href="/contact"
-				class="block rounded-md px-3 py-2 text-base hover:bg-gray-700 hover:text-white">Contact</a
-			>
+					&nbsp;
+				</div>
+				<div
+					class="fixed right-0 top-0 z-40 h-full w-full translate-x-full overflow-y-auto overscroll-y-none transition duration-500 peer-checked:translate-x-0"
+				>
+					<div class="float-right min-h-full w-[65%] bg-gray-400 px-6 pt-12 shadow-2xl">
+						<menu>
+							{#each navOptions as option, i}
+								<li class="m-2">
+									<a
+										href={option.href}
+										class=" rounded-md px-3 py-2 text-2xl hover:text-white"
+										aria-current="page">{option.page}</a
+									>
+								</li>
+							{/each}
+						</menu>
+					</div>
+				</div>
+			</label>
 		</div>
 	</div>
 </nav>

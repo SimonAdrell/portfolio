@@ -1,4 +1,6 @@
 <script lang="ts">
+	import FooterComponent from '$lib//nav/FooterComponent.svelte';
+
 	import NavComponent from '$lib//nav/NavComponent.svelte';
 
 	import { i18n } from '$lib/i18n';
@@ -10,11 +12,16 @@
 </script>
 
 <ParaglideJS {i18n}>
-	<div class="min-h-full bg-black">
-		<NavComponent></NavComponent>
-		<main>
+	<div class="grid min-h-svh grid-rows-[auto-1fr-auto] bg-black">
+		<header>
+			<NavComponent></NavComponent>
+		</header>
+		<main class="">
 			{@render children()}
 		</main>
+		<footer>
+			<FooterComponent></FooterComponent>
+		</footer>
 	</div>
 
 	<style lang="postcss">
