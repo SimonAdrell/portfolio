@@ -8,7 +8,11 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				'orange': '#FF9900'
+			}
+		}
 	},
 
 	plugins: [typography, forms, containerQueries, aspectRatio]

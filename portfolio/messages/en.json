@@ -1,4 +1,14 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from en!"
+	"hello_world": "Hello, {name} from en!",
+	"startPageTagLine": "The rolling freelancer",
+	"startPageName": "Simon Adrell",
+	"aboutMe": "About me",
+	"mySkills": "My skills",
+	"mySkillsTagLine": "What can I do for you?",
+	"contact": "Contact",
+	"customerCases": "Customer cases",
+	"whatCanIDo": "What can I do for you?",
+	"connect": "Let's connect!",
+	"aboutTagline": "A developer trying to make the world a better place. One line at a time."
 }
