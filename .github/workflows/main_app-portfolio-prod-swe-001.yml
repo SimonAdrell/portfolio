@@ -20,7 +20,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: npm install, build, and test
         run: |
           cd portfolio
