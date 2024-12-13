@@ -17,6 +17,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.45.3",
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/enhanced-img": "^0.4.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
@@ -44,6 +45,9 @@
 	},
 	"dependencies": {
 		"@inlang/paraglide-sveltekit": "^0.11.1",
-		"@inlang/paraglide-vite": "^1.2.76"
+		"@inlang/paraglide-vite": "^1.2.76",
+		"@lottiefiles/dotlottie-web": "^0.36.1",
+		"lucide-svelte": "^0.468.0",
+		"sharp": "^0.33.5"
 	}
 }
