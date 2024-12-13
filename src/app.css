@@ -4,3 +4,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'SimonsHandwriting-Regular';
+		src: local('SimonsHandwriting-Regular'), local('SimonsHandwriting-regular'), local('simonhandwriting-regular'),
+			url('/fonts/SimonsHandwriting-Regular.otf');
+		font-weight: normal;
+		font-display: swap;
+	}
+}
