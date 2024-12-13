@@ -1,35 +1,27 @@
 <script lang="ts">
-	import FooterComponent from '$lib//nav/FooterComponent.svelte';
-
-	import NavComponent from '$lib//nav/NavComponent.svelte';
-
-	import { i18n } from '$lib/i18n';
-	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
-	import '../app.css';
-	import * as m from '$lib/paraglide/messages';
-	import { backIn } from 'svelte/easing';
+	import FooterComponent from "$lib//nav/FooterComponent.svelte";
+	import NavComponent from "$lib//nav/NavComponent.svelte";
+	import { i18n } from "$lib/i18n";
+	import { ParaglideJS } from "@inlang/paraglide-sveltekit";
+	import { page } from "$app/stores";
+	import "../app.css";
 	let { children } = $props();
+	console.log(children);
+	let isStartPage = (): boolean => {
+		return true;
+		return $page.url.pathname != "/";
+	};
 </script>
 
 <ParaglideJS {i18n}>
-	<div class="grid min-h-svh grid-rows-[auto-1fr-auto] bg-black">
-		<header>
-			<NavComponent></NavComponent>
+	<div class=" md:grid min-h-screen  bg-primary dark:bg-primaryDark">
+		<header class="sticky top-0 bg-primary dark:bg-primaryDark">
+			{#if isStartPage()}
+				<NavComponent></NavComponent>
+			{/if}
 		</header>
 		<main class="">
 			{@render children()}
 		</main>
-		<footer>
-			<FooterComponent></FooterComponent>
-		</footer>
 	</div>
-
-	<style lang="postcss">
-		:global(html) {
-			background-color: theme(colors.black);
-		}
-		:global(body) {
-			background-color: theme(colors.black);
-		}
-	</style>
 </ParaglideJS>
