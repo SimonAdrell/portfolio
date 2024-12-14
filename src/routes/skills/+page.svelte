@@ -1,10 +1,7 @@
 <script lang="ts">
-  import TypingAnimation from './TypingAnimation.svelte';
-
+	import TypingAnimation from "./TypingAnimation.svelte";
 	import handsImg from "$lib/assets/workingHands.jpeg";
 	import * as m from "$lib/paraglide/messages";
-	import type { PageData } from "./$types";
-	export let data: PageData;
 
 	export function animateTyping(node: HTMLElement, texts: string[]) {
 		let textsToType = texts;
@@ -27,24 +24,20 @@
 			updateInnerHTML();
 		};
 
-		// Blinking cursor effect
 		const waitingEffect = (delay: number) => {
 			const interval = setInterval(blinkingCursor, 500);
-
 			setTimeout(() => {
 				clearInterval(interval); // Stop blinking
 				if (currentText.endsWith("|")) {
-					// Remove cursor if it's still there
 					currentText = currentText.slice(0, -1);
 				}
 				updateInnerHTML();
 			}, delay);
 		};
 
-		// Typing animation effect
 		const typeEffect = () => {
 			const currentString = textsToType[textsIndex];
-			const delay = currentString[charIndex] === " " ? 75 : 100; // Faster delay for spaces
+			const delay = currentString[charIndex] === " " ? 75 : 100;
 
 			if (charIndex < currentString.length) {
 				currentText += currentString[charIndex++];
@@ -55,7 +48,6 @@
 
 			updateInnerHTML(true);
 		};
-		// Start typing effect
 		setTimeout(typeEffect, 500);
 
 		return {
@@ -71,27 +63,30 @@
 	class="flex h-[30rem] mb-7 md:mb-0 md:h-[36rem] items-center bg-[url('$lib/assets/workingHands.jpeg')] w-full bg-cover bg-center bg-gray-900 bg-opacity-50 justify-center"
 >
 	<header
-		class="flex items-center  justify-center h-full w-full bg-gray-900 bg-opacity-50"
+		class="flex items-center justify-center h-full w-full bg-gray-900 bg-opacity-50"
 	>
 		<div>
 			<h1
-				class="bold text-5xl  font-logo tracking-tight text-white md:text-8xl ml-9 md:ml-0"
+				class="bold text-5xl font-logo tracking-tight text-white md:text-8xl ml-9 md:ml-0"
 			>
 				[{m.mySkills()}]
 			</h1>
-			<TypingAnimation typingTexts={[m.mySkillsTagLine()]}></TypingAnimation>
+			<TypingAnimation typingTexts={[m.mySkillsTagLine()]}
+			></TypingAnimation>
 		</div>
 	</header>
 </div>
 <div class="flex items-center justify-center text-fontcolor">
-	<main  class="w-3/4">
+	<main class="w-3/4">
 		<div class="md:p-12">
 			<h1
-				class="bold p-1 text-3xl font-normal tracking-tight  text-tertiary dark:text-tertiaryDark md:text-6xl"
+				class="bold p-1 text-3xl font-normal tracking-tight text-tertiary dark:text-tertiaryDark md:text-6xl"
 			>
 				So, what's my history?
 			</h1>
-			<div class="text-tertiary dark:text-tertiary font-light text-lg block mt-12 p-6 bg-accent dark:bg-accentDark border border-gray-200 rounded-lg shadow dark:border-gray-700">
+			<div
+				class="text-tertiary dark:text-tertiary font-light text-lg block mt-12 p-6 bg-accent dark:bg-accentDark border border-gray-200 rounded-lg shadow dark:border-gray-700"
+			>
 				<div class="md:flex flex-row">
 					<div class="flex-1 justify-center md:p-5">
 						<img
@@ -124,17 +119,17 @@
 			</div>
 
 			<h3
-				class="bold p-1 text-tertiary dark:text-tertiary text-xl font-normal tracking-tight text-fontcolor md:text-3xl"
+				class="hidden bold p-1 text-tertiary dark:text-tertiary text-xl font-normal tracking-tight text-fontcolor md:text-3xl"
 			>
-			My Journey
+				My Journey
 			</h3>
 
 			<ol
-				class="relative border-s border-tertiary dark:border-tertiaryDark md:p-10 dark:border-gray-700 mt-2 ml-4"
+				class=" hidden relative border-s border-tertiary dark:border-tertiaryDark md:p-10 mt-2 ml-4"
 			>
 				<li class="mb-10 ms-4">
 					<div
-						class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-tertiary dark:border-tertiaryDark bg-accent dark:border-gray-900 dark:bg-gray-700"
+						class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-tertiary dark:border-tertiaryDark bg-accent dark:bg-gray-700"
 					></div>
 					<h3
 						class=" text-orange text-lg font-semibold dark:text-white"
@@ -152,14 +147,14 @@
 				</li>
 				<li class="mb-10 ms-4">
 					<div
-						class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-tertiary dark:border-tertiaryDark bg-accent  dark:bg-accentDark"
+						class="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-tertiary dark:border-tertiaryDark bg-accent dark:bg-accentDark"
 					></div>
 					<time
 						class="mb-1 text-sm font-normal leading-none text-tertiary dark:text-tertiaryDark"
 						>May 2022</time
 					>
 					<h3
-						class=" text-tertiary dark:text-tertiaryDark text-lg font-semibold "
+						class=" text-tertiary dark:text-tertiaryDark text-lg font-semibold"
 					>
 						Annevo AB
 					</h3>

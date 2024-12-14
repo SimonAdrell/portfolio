@@ -4,8 +4,7 @@
 	import { fade } from "svelte/transition";
 	import { DotLottie } from "@lottiefiles/dotlottie-web";
 	import { onMount } from "svelte";
-	import { onNavigate } from "$app/navigation";
-	import franskaCentralmassivet from '$lib/assets/franskaCentralmas.png';
+	import franskaCentralmassivet from "$lib/assets/franskaCentralmas.png";
 	let canvas = $state<HTMLCanvasElement>();
 	onMount(() => {
 		if (canvas) {
@@ -18,7 +17,7 @@
 		}
 	});
 
-	let { data, form }: { data: PageData; form: ActionData } = $props();
+	let { form }: { form: ActionData } = $props();
 </script>
 
 <svelte:head>
@@ -33,14 +32,11 @@
 			</h1>
 		</div>
 		<div class="flex flex-row">
-			<div class="flex-1 bg-bginfo rounded-md mr-10 shadow-lg  shadow-slate-950">
-				<div class="items-center justify-center text-gray-700 ">
+			<div
+				class="flex-1 bg-bginfo rounded-md mr-10 shadow-lg shadow-slate-950"
+			>
+				<div class="items-center justify-center text-gray-700">
 					<header transition:fade class="p-10">
-						<h1
-							class="bold text-xl md:text-5xl ml-9 md:ml-0 "
-						>
-							<!-- {m.connectTagLine()} -->
-						</h1>
 						<p>
 							Whether you have a project in mind, need a reliable
 							developer on your team, or just want to discuss
@@ -56,7 +52,11 @@
 						</p>
 					</header>
 					<div class="min-w-full">
-						<img class="min-w-full " src="{franskaCentralmassivet}" alt="Franska centralmassivet">
+						<img
+							class="min-w-full"
+							src={franskaCentralmassivet}
+							alt="Franska centralmassivet"
+						/>
 					</div>
 				</div>
 			</div>

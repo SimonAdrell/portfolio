@@ -109,9 +109,9 @@
 							Check out our instagram to see more about it
 							<div class="p-2">
 								<a
-									class="text-3xl underline"
+									class="text-9xl text-orange font-SimonsHandwriting"
 									href="https://www.instagram.com/onanothertrail/"
-									target="_blank">@OnAnotherTrail</a
+									target="_blank">OnAnotherTrail</a
 								>
 							</div>
 						</div>
