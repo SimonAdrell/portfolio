@@ -7,9 +7,7 @@ export const load = (async () => {
 
 export const actions = {
     default: async ({ request }) => {
-        console.log(request);
         const data = await request.formData();
-        console.log(data)
         const emailValue = <string>data.get('email');
         const firstNameValue = <string>data.get('firstName');
         const lastNameValue = <string>data.get('lastName');
