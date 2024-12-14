@@ -31,10 +31,8 @@
 				{m.connect()}
 			</h1>
 		</div>
-		<div class="flex flex-row">
-			<div
-				class="flex-1 bg-bginfo rounded-md mr-10 shadow-lg shadow-slate-950"
-			>
+		<div class="grid grid-cols-2 grid-rows-1 gap-4">
+			<div class="bg-bginfo bg-accent rounded-md shadow">
 				<div class="items-center justify-center text-gray-700">
 					<header transition:fade class="p-10">
 						<p>
@@ -63,12 +61,18 @@
 			<div class="flex-2">
 				<div class=" bg-white text-lg rounded-md text-gray-900">
 					{#if form?.success}
-						<p class="">Thanks for contacting me!</p>
-						<canvas
-							bind:this={canvas}
-							id="dotlottie-canvas"
-							style="width: 300px; height:300px;"
-						></canvas>
+						<div class=" p-2 align-middle items-center text-center">
+							<h1
+								class=" text-tertiary md:text-5xl lg:text-7xl text-center dark:text-tertiaryDark text-12xl font-SimonsHandwriting"
+							>
+								Thanks for contacting me!
+							</h1>
+							<canvas
+								bind:this={canvas}
+								id="dotlottie-canvas"
+								style="width: 300px; height:300px;"
+							></canvas>
+						</div>
 					{:else}
 						<form method="POST" class="">
 							<div class="md:flex flex-wrap flex-1">

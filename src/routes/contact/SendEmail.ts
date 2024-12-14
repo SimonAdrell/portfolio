@@ -1,5 +1,5 @@
 import { SENDGRID_API_KEY, SENDGRID_TEMPLATE_ID } from '$env/static/private';
-import type MailService from '@sendgrid/mail/src/mail';
+import MailService from '@sendgrid/mail/src/mail';
 
 export async function SendEmail(emailValue: string, firstNameValue: string, lastNameValue: string, messageValue: string) {
     MailService.setApiKey(SENDGRID_API_KEY);
