@@ -4,8 +4,7 @@
 	import { fade } from "svelte/transition";
 	import { DotLottie } from "@lottiefiles/dotlottie-web";
 	import { onMount } from "svelte";
-	import { onNavigate } from "$app/navigation";
-	import franskaCentralmassivet from '$lib/assets/franskaCentralmas.png';
+	import franskaCentralmassivet from "$lib/assets/franskaCentralmas.png";
 	let canvas = $state<HTMLCanvasElement>();
 	onMount(() => {
 		if (canvas) {
@@ -18,7 +17,7 @@
 		}
 	});
 
-	let { data, form }: { data: PageData; form: ActionData } = $props();
+	let { form }: { form: ActionData } = $props();
 </script>
 
 <svelte:head>
@@ -32,15 +31,10 @@
 				{m.connect()}
 			</h1>
 		</div>
-		<div class="flex flex-row">
-			<div class="flex-1 bg-bginfo rounded-md mr-10 shadow-lg  shadow-slate-950">
-				<div class="items-center justify-center text-gray-700 ">
+		<div class="grid grid-cols-2 grid-rows-1 gap-4">
+			<div class="bg-bginfo bg-accent rounded-md shadow">
+				<div class="items-center justify-center text-gray-700">
 					<header transition:fade class="p-10">
-						<h1
-							class="bold text-xl md:text-5xl ml-9 md:ml-0 "
-						>
-							<!-- {m.connectTagLine()} -->
-						</h1>
 						<p>
 							Whether you have a project in mind, need a reliable
 							developer on your team, or just want to discuss
@@ -56,19 +50,29 @@
 						</p>
 					</header>
 					<div class="min-w-full">
-						<img class="min-w-full " src="{franskaCentralmassivet}" alt="Franska centralmassivet">
+						<img
+							class="min-w-full"
+							src={franskaCentralmassivet}
+							alt="Franska centralmassivet"
+						/>
 					</div>
 				</div>
 			</div>
 			<div class="flex-2">
 				<div class=" bg-white text-lg rounded-md text-gray-900">
 					{#if form?.success}
-						<p class="">Thanks for contacting me!</p>
-						<canvas
-							bind:this={canvas}
-							id="dotlottie-canvas"
-							style="width: 300px; height:300px;"
-						></canvas>
+						<div class=" p-2 align-middle items-center text-center">
+							<h1
+								class=" text-tertiary md:text-5xl lg:text-7xl text-center dark:text-tertiaryDark text-12xl font-SimonsHandwriting"
+							>
+								Thanks for contacting me!
+							</h1>
+							<canvas
+								bind:this={canvas}
+								id="dotlottie-canvas"
+								style="width: 300px; height:300px;"
+							></canvas>
+						</div>
 					{:else}
 						<form method="POST" class="">
 							<div class="md:flex flex-wrap flex-1">

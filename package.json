@@ -47,6 +47,8 @@
 		"@inlang/paraglide-sveltekit": "^0.11.1",
 		"@inlang/paraglide-vite": "^1.2.76",
 		"@lottiefiles/dotlottie-web": "^0.36.1",
+		"@notionhq/client": "^2.2.15",
+		"@sendgrid/mail": "^8.1.4",
 		"lucide-svelte": "^0.468.0",
 		"sharp": "^0.33.5"
 	}
