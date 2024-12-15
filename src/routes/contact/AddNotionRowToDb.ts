@@ -1,12 +1,12 @@
-import { NOTION_API_KEY, NOTION_LEADS_DB_ID } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { Client } from '@notionhq/client';
 
 export async function AddNotionRowToDb(firstNameValue: string, lastNameValue: string, emailValue: string, messageValue: string) {
-    const notion = new Client({ auth: NOTION_API_KEY });
+    const notion = new Client({ auth: env.NOTION_API_KEY });
     await (async () => {
         await notion.pages.create({
             parent: {
-                database_id: NOTION_LEADS_DB_ID,
+                database_id: env.NOTION_LEADS_DB_ID,
             },
             properties: {
                 'Name': {

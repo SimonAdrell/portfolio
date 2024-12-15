@@ -1,13 +1,13 @@
-import { SENDGRID_API_KEY, SENDGRID_TEMPLATE_ID } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import MailService from '@sendgrid/mail/src/mail';
 
 export async function SendEmail(emailValue: string, firstNameValue: string, lastNameValue: string, messageValue: string) {
-    MailService.setApiKey(SENDGRID_API_KEY);
+    MailService.setApiKey(env.SENDGRID_API_KEY);
     await MailService
         .send({
             from: { email: 'Simon@CodeBySimon.com', name: 'Simon Adrell' },
             bcc: 'Simon@CodeBySimon.com',
-            templateId: SENDGRID_TEMPLATE_ID,
+            templateId: env.SENDGRID_TEMPLATE_ID,
             personalizations: [
                 {
                     to: { email: emailValue, name: firstNameValue + ' ' + lastNameValue },
