@@ -52,6 +52,6 @@ export async function AddNotionRowToDb(firstNameValue: string, lastNameValue: st
                 console.error(error);
                 console.log('error:', error.response.body.errors);
                 throw new Error("Could not add notion row");
-        });
+            });
     })();
 }
