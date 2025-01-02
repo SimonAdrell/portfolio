@@ -15,7 +15,7 @@
 	<title>Code By Simon - About Me</title>
 </svelte:head>
 
-<div class="h-screen w-full ">
+<div class="h-screen w-full">
 	<div class="flex h-1/3 mb-7 md:mb-0 md:h-[20rem] w-full">
 		{#if ready}
 			<header
@@ -26,10 +26,12 @@
 					easing: backOut,
 				}}
 			>
-				<div class="text-tertiary dark:text-tertiaryDark max-w-fit flex-1">
+				<div
+					class="text-tertiary dark:text-tertiaryDark max-w-fit flex-1"
+				>
 					<div class="">
 						<h1
-							class=" max-w-fit font-SimonsHandwriting text-8xl md:text-9xl ml-9 md:ml-0 leading-1"
+							class=" max-w-fit font-SimonsHandwriting text-7xl md:text-9xl ml-9 md:ml-0 leading-1"
 						>
 							{m.aboutMeHeader()}
 						</h1>
@@ -65,12 +67,12 @@
 					</div>
 					<div class="flex-1 grow p-12">
 						<h1
-							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary dark:text-tertiaryDark md:text-5xl lg:text-5xl "
+							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary dark:text-tertiaryDark md:text-5xl lg:text-5xl"
 						>
 							Developer since 2012
 						</h1>
 						<div
-							class="block mt-12 p-4 md:p-6 bg-accent dark:bg-tertiary border border-gray-200 rounded-lg shadow dark:text-secondaryDark  dark:border-gray-700"
+							class="block mt-12 p-4 md:p-6 bg-accent dark:bg-tertiary border border-gray-200 rounded-lg shadow dark:text-secondaryDark dark:border-gray-700"
 						>
 							<p class="">
 								I'm Simon - a programmer that deliver great code
@@ -90,7 +92,7 @@
 							Vanlifer since 2021
 						</h1>
 						<div
-							class="block mt-12 p-6 bg-accent border border-gray-200 rounded-lg shadow dark:bg-tertiary  dark:border-tertiaryDark"
+							class="block mt-12 p-6 bg-accent border border-gray-200 rounded-lg shadow dark:bg-tertiary dark:border-tertiaryDark"
 						>
 							<span class="">
 								Three years ago, my partner and I set off on a
@@ -109,7 +111,7 @@
 							Check out our instagram to see more about it
 							<div class="p-2">
 								<a
-									class="text-9xl text-orange font-SimonsHandwriting"
+									class="text-7xl md:text-9xl text-orange font-SimonsHandwriting"
 									href="https://www.instagram.com/onanothertrail/"
 									target="_blank">OnAnotherTrail</a
 								>
