@@ -11,7 +11,7 @@
 </script>
 
 <div class="flex w-screen items-center align-middle">
-	<div class="items-center flex">
+	<div class="items-center justify-center text-center flex">
 		{#if ready}
 			<header
 				in:fly={{
@@ -20,7 +20,9 @@
 					easing: backOut,
 				}}
 			>
-				<div class="w-screen place-items-center">
+				<div
+					class="w-screen justify-center place-items-center flex items-center"
+				>
 					<div>
 						{@html myfaceSvg}
 					</div>
@@ -31,7 +33,7 @@
 					Code By Simon
 				</h1>
 				<div class="text-2xl w-screen items-center place-items-center">
-					<a href="/contact" class="flex items-center">
+					<a href="/contact" class="flex justify-center items-center">
 						<button
 							aria-label="Contact me"
 							type="button"
