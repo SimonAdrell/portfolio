@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { ActionData, PageData } from "./$types";
 	import * as m from "$lib/paraglide/messages";
-	import { fade } from "svelte/transition";
 	import { DotLottie } from "@lottiefiles/dotlottie-web";
 	import { onMount } from "svelte";
 	import franskaCentralmassivet from "$lib/assets/franskaCentralmas.png";
@@ -28,11 +27,11 @@
 </svelte:head>
 
 <div class=" flex items-center p-3 justify-center text-white">
-	<main transition:fade={{ delay: 40, duration: 500 }} class="w-3/4">
+	<main class="w-3/4">
 		<div class="md:grid grid-cols-2 grid-rows-1 gap-4">
 			<div class=" bg-accent rounded-md shadow">
 				<div class="items-center justify-center text-gray-700">
-					<header transition:fade class="p-10">
+					<header class="p-10">
 						<p>
 							Whether you have a project in mind, need a reliable
 							developer on your team, or just want to discuss
