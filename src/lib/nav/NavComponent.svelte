@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import myface from "$lib/assets/myface.svg?raw";
 	import { navOptions } from "./nav.svelte";
 	let isStartPage = (): boolean => {
 		return $page.url.pathname != "/";
@@ -8,20 +7,21 @@
 </script>
 
 <nav class="">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex h-16">
 			<div class="flex-1 md:p-4">
 				{#if isStartPage()}
-				<a href="/" title="Start">
-					<span class="font-SimonsHandwriting text-6xl md:text-8xl md:leading-6 text-orange">Code By Simon</span>
-				</a>			
+					<a href="/" title="Start">
+						<span
+							class="font-SimonsHandwriting text-6xl md:text-8xl md:leading-6 text-orange"
+							>Code By Simon</span
+						>
+					</a>
 				{/if}
 			</div>
 			<div class="flex-1 hidden md:flex p-4 justify-end">
 				<div class="hidden md:block">
-					<div
-						class="ml-10 flex items-baseline space-x-4 font-thin "
-					>
+					<div class="ml-10 flex items-baseline space-x-4 font-thin">
 						{#each navOptions as option, i}
 							<div>
 								<a
@@ -59,7 +59,7 @@
 								<li class="m-2">
 									<a
 										href={option.href}
-										class=" rounded-md px-3 py-2 text-2xl  hover:text-white"
+										class=" rounded-md px-3 py-2 text-2xl hover:text-white"
 										aria-current={$page.url.pathname ===
 											option.href}>{option.page}</a
 									>

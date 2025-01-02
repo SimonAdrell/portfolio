@@ -2,7 +2,6 @@
 	import { fly } from "svelte/transition";
 	import { backOut } from "svelte/easing";
 	import { onMount } from "svelte";
-	import { navOptions } from "$lib/nav/nav.svelte";
 	import myfaceSvg from "$lib/assets/myface.svg?raw";
 	import { Send } from "lucide-svelte";
 	import * as m from "$lib/paraglide/messages";
@@ -45,19 +44,6 @@
 							<span class="pl-3"> {m.ctaStart()} </span></button
 						>
 					</a>
-				</div>
-				<div class="w-screen hidden place-items-center">
-					<div class="xl:flex flex-wrap p-2">
-						{#each navOptions as option, i}
-							<div class="flex-2 pt-7 text-center">
-								<a
-									href={option.href}
-									class="	rounded-md px-5 py-2 font-thin md:text-4xl underline underline-offset-[10px] decoration-1 text-2xl hover:text-white transition-colors duration-500 text-orange"
-									>{option.page}</a
-								>
-							</div>
-						{/each}
-					</div>
 				</div>
 			</header>
 		{/if}
