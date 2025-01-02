@@ -4,6 +4,8 @@
 	import { onMount } from "svelte";
 	import { navOptions } from "$lib/nav/nav.svelte";
 	import myfaceSvg from "$lib/assets/myface.svg?raw";
+	import { Send } from "lucide-svelte";
+	import * as m from "$lib/paraglide/messages";
 	let ready = false;
 	onMount(() => (ready = true));
 </script>
@@ -28,6 +30,20 @@
 				>
 					Code By Simon
 				</h1>
+				<div class="text-2xl w-screen items-center place-items-center">
+					<a href="/contact" class="flex items-center">
+						<button
+							aria-label="Contact me"
+							type="button"
+							class="bg-accent p-3 rounded-2xl flex items-center"
+						>
+							<span>
+								<Send></Send>
+							</span>
+							<span class="pl-3"> {m.ctaStart()} </span></button
+						>
+					</a>
+				</div>
 				<div class="w-screen hidden place-items-center">
 					<div class="xl:flex flex-wrap p-2">
 						{#each navOptions as option, i}
