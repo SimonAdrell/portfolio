@@ -13,5 +13,7 @@
 	"aboutTagline": "A freelancing backend developer",
 	"secondAboutTagLine": "One line at a time.",
 	"aboutMeHeader": "Hej! I'm Simon Adrell",
-	"ctaStart": "Send me a message"
+	"ctaStart": "Send me a message",
+	"aboutTheDeveloper": "I’m Simon Adrell - a senior developer that decided to start CodeBySimon during 2024. I got into freelancing to have the ability to embrace the flexibility of working remotely and pursuing projects that align more closely with my passions. ",
+	"aboutTheDeveloperSecond": "My journey as developer started out in 2012 and since then have I been working with everything between C# to react native, to Svelte and Sveltekit  to Azure and the world of devops. and much much  more. In recent years it has become mainly .NET, C# and Azure."
 }

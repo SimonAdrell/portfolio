@@ -6,6 +6,7 @@
 	import { backOut } from "svelte/easing";
 	import portrait from "$lib/assets/porttrait.jpg";
 	import rutImg from "$lib/assets/rutImg.jpeg";
+	import { Send } from "lucide-svelte";
 
 	let ready = $state(false);
 	onMount(() => (ready = true));
@@ -27,7 +28,7 @@
 				}}
 			>
 				<div
-					class="text-tertiary dark:text-tertiaryDark max-w-fit flex-1"
+					class="text-tertiary dark:text-secondaryDark max-w-fit flex-1"
 				>
 					<div class="">
 						<h1
@@ -41,7 +42,7 @@
 		{/if}
 	</div>
 	<div
-		class="flex h-4/6 bg-tertiary dark:bg-tertiaryDark text-primary dark:text-primaryDark place-items-center flex-col"
+		class="flex h-4/6 bg-tertiary dark:text-secondaryDark text-primary dark:text-primaryDark place-items-center flex-col"
 	>
 		<div class="mt-[-5rem] flex-1">
 			{@html myfaceSvg}
@@ -54,7 +55,7 @@
 
 <div class=" ">
 	<main class="">
-		<div class="py mx-auto max-w-screen-xl text-center lg:py-16">
+		<div class="py mx-auto max-w-screen-xl lg:py-16">
 			<div class=" text-secondary dark:text-secondaryDark text-xl">
 				<div class="  md:flex flex-row">
 					<div class="flex-1 justify-center p-12 flex">
@@ -67,7 +68,7 @@
 					</div>
 					<div class="flex-1 grow p-12">
 						<h1
-							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary dark:text-tertiaryDark md:text-5xl lg:text-5xl"
+							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary dark:text-secondaryDark md:text-5xl lg:text-5xl"
 						>
 							Developer since 2012
 						</h1>
@@ -75,11 +76,10 @@
 							class="block mt-12 p-4 md:p-6 bg-accent dark:bg-tertiary border border-gray-200 rounded-lg shadow dark:text-secondaryDark dark:border-gray-700"
 						>
 							<p class="">
-								I'm Simon - a programmer that deliver great code
-								from anywhere my campervan can takes me. Since
-								diving into programming as a teenager I’ve been
-								hooked on the art of writing clean, sustainable
-								code.
+								{m.aboutTheDeveloper()}
+							</p>
+							<p class="mt-5">
+								{m.aboutTheDeveloperSecond()}
 							</p>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 				<div class="md:flex flex-row">
 					<div class="flex-1 box-content my-3 p-12">
 						<h1
-							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary md:text-5xl lg:text-5xl dark:text-tertiaryDark"
+							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary md:text-5xl lg:text-5xl dark:text-secondaryDark"
 						>
 							Vanlifer since 2021
 						</h1>
@@ -125,6 +125,25 @@
 							class="rounded-xl object-contain"
 						/>
 					</div>
+				</div>
+				<div>
+					<a
+						href="/contact"
+						class="flex justify-center items-center mt-4 text-tertiary"
+					>
+						<button
+							aria-label="Contact me"
+							type="button"
+							class="bg-accent p-3 rounded-2xl flex items-center"
+						>
+							<span>
+								<Send></Send>
+							</span>
+							<span class="pl-3">
+								{m.ctaStart()}
+							</span></button
+						>
+					</a>
 				</div>
 			</div>
 		</div>
