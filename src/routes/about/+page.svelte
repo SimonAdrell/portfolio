@@ -94,22 +94,16 @@
 						<div
 							class="block mt-12 p-6 bg-accent border border-gray-200 rounded-lg shadow dark:bg-tertiary dark:border-tertiaryDark"
 						>
-							<span class="">
-								Three years ago, my partner and I set off on a
-								European adventure. From Spain's sun-soaked
-								beaches to the mountains of Greece, I've been
-								coding from some pretty spectacular spots, all
-								thanks to Europe's good internet coverage.
-							</span>
-							<p class="mt-5">
-								Beyond the screen, I'm a friendly, easy-going
-								person who's always up for a laugh. I love
-								exploring new cities and, most of all, hitting
-								the trails. Hiking up a mountain to a stunning
-								view is my idea of a perfect day.
+							<p class="whitespace-pre-wrap">
+								{m.aboutTheVanlifer()}
 							</p>
-							Check out our instagram to see more about it
-							<div class="p-2">
+							<p class="mt-5 whitespace-pre-wrap">
+								{m.aboutTheVanliferSecond()}
+							</p>
+							<div class="">
+								<p class="mt-5">
+									{m.CheckInstagram()}
+								</p>
 								<a
 									class="text-7xl md:text-9xl text-orange font-SimonsHandwriting"
 									href="https://www.instagram.com/onanothertrail/"

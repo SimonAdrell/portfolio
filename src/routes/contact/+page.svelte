@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ActionData, PageData } from "./$types";
 	import * as m from "$lib/paraglide/messages";
+	import { Send } from "lucide-svelte";
 	import { DotLottie } from "@lottiefiles/dotlottie-web";
 	import { onMount } from "svelte";
 	import franskaCentralmassivet from "$lib/assets/franskaCentralmas.png";
@@ -12,7 +13,7 @@
 				autoplay: true,
 				loop: false,
 				canvas: canvas,
-				src: "src/lib/assets/lottie/confetti.json", // or .json file
+				src: "src/lib/assets/lottie/confetti.json",
 			});
 		}
 	});
@@ -179,9 +180,13 @@
 							</div>
 							<div class="md:flex flex-1 md:p-5">
 								<button
-									class="bg-gray-600 min-w-full border p-2 active:bg-orange text-white px-6 rounded"
+									type="submit"
+									class="bg-gray-600 border active:bg-orange text-white px-6 rounded p-3 flex items-center"
 								>
-									Send
+									<span>
+										<Send></Send>
+									</span>
+									<span class="pl-3"> Send </span>
 								</button>
 							</div>
 						</form>
