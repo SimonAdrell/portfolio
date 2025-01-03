@@ -61,8 +61,4 @@
     }
 </script>
 
-<h2
-    class="mb-3 ml-10 font-thin text-2xl  max-w-fit text-center text-orange md:text-3xl mt-5  w-5/6"
-    use:animateTyping={typingTexts}>
-    &nbsp; s
-</h2>
+<span class="" use:animateTyping={typingTexts}> &nbsp; </span>

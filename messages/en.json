@@ -13,5 +13,10 @@
 	"aboutTagline": "A freelancing backend developer",
 	"secondAboutTagLine": "One line at a time.",
 	"aboutMeHeader": "Hej! I'm Simon Adrell",
-	"ctaStart": "Send me a message"
+	"ctaStart": "Send me a message",
+	"aboutTheDeveloper": "I’m Simon Adrell - a senior developer that decided to start CodeBySimon during 2024. I got into freelancing to have the ability to embrace the flexibility of working remotely and pursuing projects that align more closely with my passions. ",
+	"aboutTheDeveloperSecond": "My journey as developer started out in 2012 and since then have I been working with everything between C# to react native, to Svelte and Sveltekit  to Azure and the world of devops. and much much  more. In recent years it has become mainly .NET, C# and Azure.",
+	"aboutTheVanlifer": "Outside work I am an easy-going person who’s always up for a laugh. I love both exploring new places and hiking. My favorite city is Porto in Portugal and if I had to choose one of the best places for a hike it would be Picos de Europa in northern Spain or Central massif in France.",
+	"aboutTheVanliferSecond": "In 2021 my partner and I decided to set off on a European adventure, the idea was that we would be out on a trip to Spain and Portugal for six months with our campervan. Only a couple months into the trip we felt that it really was something we liked and now we are here 3 years later and we cancelled the lease on our apartment. We have been everywhere from the mountains in Scotland to the Sunsoaked beaches of Greece. ",
+	"CheckInstagram": "Check out our instagram to see more about it"
 }
