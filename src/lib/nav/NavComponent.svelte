@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { navOptions } from "./nav.svelte";
-	let isStartPage = (): boolean => {
-		return $page.url.pathname != "/";
+	let visible = $state(false);
+	const isStartPage = (): boolean => page.url.pathname != "/";
+	const toggleVisibility = () => {
+		visible = !visible;
 	};
 </script>
 
@@ -27,7 +29,7 @@
 								<a
 									href={option.href}
 									class=" text-xl underline-offset-1 text-secondary dark:text-secondaryDark transition-all duration-100 hover:pt-4 pt-2 hover:dark:text-tertiaryDark hover:text-tertiary aria-[current=true]:text-tertiary aria-[current=trye]:dark:text-tertiaryDark aria-[current=true]:text-2xl"
-									aria-current={$page.url.pathname ===
+									aria-current={page.url.pathname ===
 										option.href}>{option.page}</a
 								>
 							</div>
@@ -39,7 +41,12 @@
 				class="relative z-40 cursor-pointer px-3 py-6 md:hidden"
 				for="mobile-menu"
 			>
-				<input class="peer hidden" type="checkbox" id="mobile-menu" />
+				<input
+					class="peer hidden"
+					type="checkbox"
+					id="mobile-menu"
+					bind:checked={visible}
+				/>
 				<div
 					class="bg-orange before:bg-orange after:bg-orange relative z-50 block h-[2px] w-7 bg-transparent content-[''] before:absolute before:top-[-0.35rem] before:z-50 before:block before:h-full before:w-full before:transition-all before:duration-200 before:ease-out before:content-[''] after:absolute after:bottom-[-0.35rem] after:right-0 after:block after:h-full after:w-full after:transition-all after:duration-200 after:ease-out after:content-[''] peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform"
 				></div>
@@ -60,8 +67,10 @@
 									<a
 										href={option.href}
 										class=" rounded-md px-3 py-2 text-2xl hover:text-white"
-										aria-current={$page.url.pathname ===
-											option.href}>{option.page}</a
+										aria-current={page.url.pathname ===
+											option.href}
+										onclick={toggleVisibility}
+										>{option.page}</a
 									>
 								</li>
 							{/each}
@@ -72,11 +81,3 @@
 		</div>
 	</div>
 </nav>
-
-<style>
-	/* nav {
-		display: flex;
-		justify-content: space-between;
-		view-transition-name: header;
-	} */
-</style>
