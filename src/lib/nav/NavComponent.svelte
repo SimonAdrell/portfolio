@@ -23,20 +23,7 @@
 				{/if}
 			</div>
 			<div class="flex-1 hidden md:flex p-4 justify-end">
-				<div class="hidden md:block">
-					<!-- <div class="ml-10 flex items-baseline space-x-4 font-thin">
-						{#each navOptions as option, i}
-							<div>
-								<a
-									href={option.href}
-									class=" text-xl underline-offset-1 text-secondary dark:text-secondaryDark transition-all duration-100 hover:pt-4 pt-2 hover:dark:text-tertiaryDark hover:text-tertiary aria-[current=true]:text-tertiary aria-[current=trye]:dark:text-tertiaryDark aria-[current=true]:text-2xl"
-									aria-current={page.url.pathname ===
-										option.href}>{option.page}</a
-								>
-							</div>
-						{/each}
-					</div> -->
-				</div>
+				<div class="hidden md:block"></div>
 			</div>
 			<label
 				class="relative z-40 cursor-pointer px-3 py-6 md:hidden"
@@ -62,20 +49,7 @@
 					<div
 						class="float-right min-h-full w-[65%] bg-primary dark:bg-primaryDark dark:text-tertiaryDark text-tertiary px-6 pt-12 shadow-2xl"
 					>
-						<menu>
-							{#each navOptions as option, i}
-								<li class="m-2">
-									<a
-										href={option.href}
-										class=" rounded-md px-3 py-2 text-2xl hover:text-white"
-										aria-current={page.url.pathname ===
-											option.href}
-										onclick={toggleVisibility}
-										>{option.page}</a
-									>
-								</li>
-							{/each}
-						</menu>
+						<menu> </menu>
 					</div>
 				</div>
 			</label>
