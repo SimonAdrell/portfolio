@@ -14,7 +14,7 @@
 </script>
 
 <ParaglideJS {i18n}>
-	<div class=" md:grid min-h-screen  bg-primary dark:bg-primaryDark">
+	<div class=" md:grid min-h-screen bg-primary dark:bg-primaryDark">
 		<header class="sticky top-0 bg-primary dark:bg-primaryDark">
 			{#if isStartPage()}
 				<NavComponent></NavComponent>
