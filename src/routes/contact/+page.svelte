@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Who am I?</title>
+	<title>Code By Simon: Contact</title>
 </svelte:head>
 
 <div class=" flex items-center p-3 justify-center text-white">
