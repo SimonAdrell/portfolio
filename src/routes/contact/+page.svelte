@@ -28,13 +28,13 @@
 </svelte:head>
 
 <div class=" flex items-center p-3 justify-center text-white">
-	<main class="w-3/4">
+	<main class="md:w-3/4">
 		<div class="md:grid grid-cols-2 grid-rows-1 gap-4">
-			<div class=" bg-accent rounded-md shadow">
+			<div class=" bg-accent md:rounded-md shadow">
 				<div class="items-center justify-center text-gray-700">
 					<header class="p-10">
 						<h1
-							class="text-4xl md:text-5xl lg:text-8xl text-center font-SimonsHandwriting text-tertiary dark:text-tertiaryDark"
+							class="text-8xl md:text-9xl lg:text-10xl text-center font-SimonsHandwriting text-tertiary dark:text-tertiaryDark"
 						>
 							Hi!
 						</h1>
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div>
-				<div class="p-3 bg-accent text-lg rounded-md text-gray-900">
+				<div class="p-3 bg-accent text-lg md:rounded-md text-gray-900">
 					{#if form?.success}
 						<div class=" p-2 align-middle items-center text-center">
 							<h1
