@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import { navOptions } from "./nav.svelte";
+
 	let visible = $state(false);
 	const isStartPage = (): boolean => page.url.pathname != "/";
 	const toggleVisibility = () => {
@@ -23,7 +24,7 @@
 			</div>
 			<div class="flex-1 hidden md:flex p-4 justify-end">
 				<div class="hidden md:block">
-					<div class="ml-10 flex items-baseline space-x-4 font-thin">
+					<!-- <div class="ml-10 flex items-baseline space-x-4 font-thin">
 						{#each navOptions as option, i}
 							<div>
 								<a
@@ -34,7 +35,7 @@
 								>
 							</div>
 						{/each}
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<label

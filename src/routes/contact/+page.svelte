@@ -33,27 +33,28 @@
 			<div class=" bg-accent rounded-md shadow">
 				<div class="items-center justify-center text-gray-700">
 					<header class="p-10">
-						<p>
-							Whether you have a project in mind, need a reliable
-							developer on your team, or just want to discuss
-							ideas, I'd love to hear from you.
-						</p>
-						<p class="mt-4">
-							I'm available for freelance opportunities or
-							consulting.
-						</p>
-						<p class="mt-4">
-							Fill out the form, and I'll get back to you as soon
-							as possible. Looking forward to connecting with you!
-						</p>
+						<h1
+							class="text-4xl md:text-5xl lg:text-8xl text-center font-SimonsHandwriting text-tertiary dark:text-tertiaryDark"
+						>
+							Hi!
+						</h1>
+						<div>
+							<p class="text-lg mt-4">
+								Whether you have a project in mind, need a
+								reliable developer on your team, or just want to
+								discuss ideas, I'd love to hear from you.
+							</p>
+							<p class="mt-4 text-lg">
+								Fill out the form, and I'll get back to you as
+								soon as possible. Looking forward to connecting
+								with you!
+							</p>
+							<p class="mt-4 text-lg">
+								Hit that send button, and let's make something
+								great together!
+							</p>
+						</div>
 					</header>
-					<div class="min-w-full">
-						<img
-							class="min-w-full"
-							src={franskaCentralmassivet}
-							alt="Franska centralmassivet"
-						/>
-					</div>
 				</div>
 			</div>
 			<div>
