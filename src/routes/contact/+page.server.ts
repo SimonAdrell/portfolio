@@ -16,7 +16,7 @@ export const actions = {
         let success = true;
         await
             addNotionRow(firstNameValue, lastNameValue, emailValue, messageValue)
-                .then(() => sendEmail(emailValue, firstNameValue, lastNameValue, messageValue))
+                // .then(() => sendEmail(emailValue, firstNameValue, lastNameValue, messageValue))
                 .catch(() => {
                     success = false;
                 });
