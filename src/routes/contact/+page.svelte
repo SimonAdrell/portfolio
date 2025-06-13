@@ -13,7 +13,7 @@
 	<title>Who am I?</title>
 </svelte:head>
 
-<div class="flex w-screen items-center align-middle">
+<div class="flex w-screen items-center">
 	<div class="items-center justify-center text-center flex">
 		{#if ready}
 			<header
