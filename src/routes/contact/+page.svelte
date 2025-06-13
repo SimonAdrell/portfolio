@@ -68,9 +68,8 @@
 							<span>
 								<Mail></Mail>
 							</span>
-							<span class="pl-3">Simon@CodeBySimon.com</span
-							></button
-						>
+							<span class="pl-3">Simon@CodeBySimon.com</span>
+						</button>
 					</a>
 				</div>
 			</header>
