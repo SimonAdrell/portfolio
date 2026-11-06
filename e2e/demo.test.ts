@@ -52,11 +52,15 @@ for (const locale of locales) {
   });
 }
 
-test("unknown URL shows the 404 page", async ({ page }) => {
-  const res = await page.goto("./does-not-exist");
-  expect(res?.status()).toBe(404);
-  await expect(page.locator("h1")).toContainText("404");
-});
+for (const locale of locales) {
+  test(`unknown URL shows the 404 page (${locale || "en"})`, async ({
+    page,
+  }) => {
+    const res = await page.goto(`./${locale}does-not-exist`);
+    expect(res?.status()).toBe(404);
+    await expect(page.locator("h1")).toContainText("404");
+  });
+}
 
 test("custom domain files point at https://codebysimon.com", () => {
   const read = (f: string) => readFileSync(resolve(build, f), "utf8");
