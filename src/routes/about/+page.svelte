@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
 	import * as m from "$lib/paraglide/messages";
 	import myfaceSvg from "$lib/assets/myface.svg?raw";
 	import { fly } from "svelte/transition";
@@ -122,7 +123,7 @@
 				</div>
 				<div>
 					<a
-						href="/contact"
+						href="{base}/contact"
 						class="flex justify-center items-center mt-4 text-tertiary"
 					>
 						<button

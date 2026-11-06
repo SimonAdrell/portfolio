@@ -1,19 +1,19 @@
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import azure from 'svelte-adapter-azure-swa';
-
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import adapter from "@sveltejs/adapter-static";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://svelte.dev/docs/kit/integrations
-	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+  preprocess: vitePreprocess(),
 
-	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: azure()
-	}
+  kit: {
+    // No fallback: src/routes/404 prerenders a real 404.html, which GitHub Pages serves for unknown paths.
+    adapter: adapter(),
+    // Pages serves the site under /portfolio; set by the workflow.
+    // Absolute asset URLs, since 404.html is served at any depth.
+    paths: { base: process.env.BASE_PATH ?? "", relative: false },
+    // Used for absolute URLs (hreflang links) in prerendered pages.
+    prerender: { origin: "https://simonadrell.github.io" },
+  },
 };
 
 export default config;
