@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const build = resolve(import.meta.dirname, "../build");
 
-// Relative paths so they resolve under the /portfolio base.
+// Paths relative to the site root.
 const pages = ["", "about", "contact", "skills"];
 const locales = ["", "se/"];
 
@@ -34,9 +34,7 @@ test.describe("without JavaScript", () => {
 });
 
 for (const locale of locales) {
-  test(`nav links load under /portfolio (${locale || "en"})`, async ({
-    page,
-  }) => {
+  test(`nav links load from the root (${locale || "en"})`, async ({ page }) => {
     const failed: string[] = [];
     page.on("response", (r) => {
       if (r.status() >= 400) failed.push(`${r.status()} ${r.url()}`);
@@ -44,20 +42,34 @@ for (const locale of locales) {
     await page.goto(locale ? "./se" : "./");
     await page.setViewportSize({ width: 1280, height: 800 });
     for (const p of ["about", "skills", "contact"]) {
-      await page
-        .locator(`nav a[href="/portfolio/${locale}${p}"]:visible`)
-        .click();
-      await expect(page).toHaveURL(new RegExp(`/portfolio/${locale}${p}$`));
+      await page.locator(`nav a[href="/${locale}${p}"]:visible`).click();
+      await expect(page).toHaveURL(new RegExp(`localhost:4173/${locale}${p}$`));
     }
     await page.locator('nav a[title="Start"]').click();
-    await expect(page).toHaveURL(new RegExp(`/portfolio/${locale}?$`));
+    await expect(page).toHaveURL(new RegExp(`localhost:4173/${locale}?$`));
     await page.evaluate(() => document.fonts.ready);
     expect(failed).toEqual([]);
   });
 }
 
-test("unknown URL shows the 404 page", async ({ page }) => {
-  const res = await page.goto("./does-not-exist");
-  expect(res?.status()).toBe(404);
-  await expect(page.locator("h1")).toContainText("404");
+for (const locale of locales) {
+  test(`unknown URL shows the 404 page (${locale || "en"})`, async ({
+    page,
+  }) => {
+    const res = await page.goto(`./${locale}does-not-exist`);
+    expect(res?.status()).toBe(404);
+    await expect(page.locator("h1")).toContainText("404");
+  });
+}
+
+test("custom domain files point at https://codebysimon.com", () => {
+  const read = (f: string) => readFileSync(resolve(build, f), "utf8");
+  expect(read("CNAME").trim()).toBe("codebysimon.com");
+  expect(read("robots.txt")).toContain(
+    "Sitemap: https://codebysimon.com/sitemap.xml",
+  );
+  const locs = [...read("sitemap.xml").matchAll(/<loc>(.*?)<\/loc>/g)];
+  expect(locs.length).toBeGreaterThan(0);
+  for (const [, url] of locs)
+    expect(url).toMatch(/^https:\/\/codebysimon\.com\//);
 });
