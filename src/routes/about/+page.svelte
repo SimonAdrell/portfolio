@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { base } from "$app/paths";
-	import * as m from "$lib/paraglide/messages";
-	import myface from "$lib/assets/myface.svg";
-	import { fly } from "svelte/transition";
-	import { onMount } from "svelte";
-	import { backOut } from "svelte/easing";
-	import portrait from "$lib/assets/porttrait.jpg";
-	import rutImg from "$lib/assets/rutImg.jpeg";
-	import { Send } from "lucide-svelte";
+	import { base } from '$app/paths';
+	import * as m from '$lib/paraglide/messages';
+	import myface from '$lib/assets/myface.svg';
+	import { fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import { backOut } from 'svelte/easing';
+	import portrait from '$lib/assets/porttrait.jpg';
+	import rutImg from '$lib/assets/rutImg.jpeg';
+	import { Send } from 'lucide-svelte';
 
 	let ready = $state(false);
 	onMount(() => (ready = true));
@@ -18,22 +18,20 @@
 </svelte:head>
 
 <div class="h-screen w-full">
-	<div class="flex h-1/3 mb-7 md:mb-0 md:h-[20rem] w-full">
+	<div class="mb-7 flex h-1/3 w-full md:mb-0 md:h-[20rem]">
 		{#if ready}
 			<header
-				class="flex items-center justify-center h-full w-full"
+				class="flex h-full w-full items-center justify-center"
 				in:fly={{
 					y: 70,
 					delay: 10,
-					easing: backOut,
+					easing: backOut
 				}}
 			>
-				<div
-					class="text-tertiary dark:text-secondaryDark max-w-fit flex-1"
-				>
+				<div class="max-w-fit flex-1 text-tertiary dark:text-secondaryDark">
 					<div class="">
 						<h1
-							class=" max-w-fit font-SimonsHandwriting text-7xl md:text-9xl ml-9 md:ml-0 leading-1"
+							class=" leading-1 ml-9 max-w-fit font-SimonsHandwriting text-7xl md:ml-0 md:text-9xl"
 						>
 							{m.aboutMeHeader()}
 						</h1>
@@ -43,12 +41,12 @@
 		{/if}
 	</div>
 	<div
-		class="flex h-4/6 bg-tertiary dark:text-secondaryDark text-primary dark:text-primaryDark place-items-center flex-col"
+		class="flex h-4/6 flex-col place-items-center bg-tertiary text-primary dark:text-primaryDark dark:text-secondaryDark"
 	>
 		<div class="mt-[-5rem] flex-1">
 			<img src={myface} alt="" width="300" height="300" />
 		</div>
-		<h2 class=" md:text-3xl text-2xl flex-1">
+		<h2 class=" flex-1 text-2xl md:text-3xl">
 			{m.aboutTagline()}
 		</h2>
 	</div>
@@ -57,24 +55,24 @@
 <div class=" ">
 	<main class="">
 		<div class="py mx-auto max-w-screen-xl lg:py-16">
-			<div class=" text-secondary dark:text-secondaryDark text-xl">
-				<div class="  md:flex flex-row">
-					<div class="flex-1 justify-center p-12 flex">
+			<div class=" text-xl text-secondary dark:text-secondaryDark">
+				<div class="  flex-row md:flex">
+					<div class="flex flex-1 justify-center p-12">
 						<img
 							src={portrait}
 							alt="Portrait of Simon"
 							height="50"
-							class="rounded-xl h-[20rem] shadow object-contain"
+							class="h-[20rem] rounded-xl object-contain shadow"
 						/>
 					</div>
 					<div class="flex-1 grow p-12">
 						<h1
-							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary dark:text-secondaryDark md:text-5xl lg:text-5xl"
+							class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-tertiary md:text-5xl lg:text-5xl dark:text-secondaryDark"
 						>
 							Developer since 2012
 						</h1>
 						<div
-							class="block mt-12 p-4 md:p-6 bg-accent dark:bg-tertiary border border-gray-200 rounded-lg shadow dark:text-secondaryDark dark:border-gray-700"
+							class="mt-12 block rounded-lg border border-gray-200 bg-accent p-4 shadow md:p-6 dark:border-gray-700 dark:bg-tertiary dark:text-secondaryDark"
 						>
 							<p class="">
 								{m.aboutTheDeveloper()}
@@ -85,15 +83,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="md:flex flex-row">
-					<div class="flex-1 box-content my-3 p-12">
+				<div class="flex-row md:flex">
+					<div class="my-3 box-content flex-1 p-12">
 						<h1
-							class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-tertiary md:text-5xl lg:text-5xl dark:text-secondaryDark"
+							class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-tertiary md:text-5xl lg:text-5xl dark:text-secondaryDark"
 						>
 							Vanlifer since 2021
 						</h1>
 						<div
-							class="block mt-12 p-6 bg-accent border border-gray-200 rounded-lg shadow dark:bg-tertiary dark:border-tertiaryDark"
+							class="mt-12 block rounded-lg border border-gray-200 bg-accent p-6 shadow dark:border-tertiaryDark dark:bg-tertiary"
 						>
 							<p class="whitespace-pre-wrap">
 								{m.aboutTheVanlifer()}
@@ -106,14 +104,14 @@
 									{m.CheckInstagram()}
 								</p>
 								<a
-									class="text-7xl md:text-9xl text-orange font-SimonsHandwriting"
+									class="font-SimonsHandwriting text-7xl text-orange md:text-9xl"
 									href="https://www.instagram.com/onanothertrail/"
 									target="_blank">OnAnotherTrail</a
 								>
 							</div>
 						</div>
 					</div>
-					<div class="flex-1 justify-center p-12 flex">
+					<div class="flex flex-1 justify-center p-12">
 						<img
 							src={rutImg}
 							alt="Campervan with mountains in the background"
@@ -122,14 +120,11 @@
 					</div>
 				</div>
 				<div>
-					<a
-						href="{base}/contact"
-						class="flex justify-center items-center mt-4 text-tertiary"
-					>
+					<a href="{base}/contact" class="mt-4 flex items-center justify-center text-tertiary">
 						<button
 							aria-label="Contact me"
 							type="button"
-							class="bg-accent p-3 rounded-2xl flex items-center"
+							class="flex items-center rounded-2xl bg-accent p-3"
 						>
 							<span>
 								<Send></Send>

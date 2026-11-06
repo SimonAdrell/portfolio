@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { fly } from "svelte/transition";
-	import { backOut } from "svelte/easing";
-	import myface from "$lib/assets/myface.svg";
-	import { Mail, ExternalLink } from "lucide-svelte";
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { backOut } from 'svelte/easing';
+	import myface from '$lib/assets/myface.svg';
+	import { Mail, ExternalLink } from 'lucide-svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -14,37 +14,35 @@
 </svelte:head>
 
 <div class="flex w-screen items-center">
-	<div class="items-center justify-center text-center flex">
+	<div class="flex items-center justify-center text-center">
 		{#if ready}
 			<header
 				in:fly={{
 					y: 70,
 					delay: 10,
-					easing: backOut,
+					easing: backOut
 				}}
 			>
-				<div
-					class="w-screen justify-center place-items-center flex items-center"
-				>
+				<div class="flex w-screen place-items-center items-center justify-center">
 					<div>
 						<img src={myface} alt="" width="300" height="300" />
 					</div>
 				</div>
 				<h1
-					class=" text-8xl w-screen font-SimonsHandwriting text-tertiary dark:text-tertiaryDark md:text-9xl lg:text-10xl text-center"
+					class=" lg:text-10xl w-screen text-center font-SimonsHandwriting text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
 				>
 					Code By Simon
 				</h1>
-				<div class="text-2xl w-screen items-center place-items-center">
+				<div class="w-screen place-items-center items-center text-2xl">
 					<a
 						href="https://www.linkedin.com/in/simon-adrell"
 						target="_blank"
-						class="flex justify-center items-center"
+						class="flex items-center justify-center"
 					>
 						<button
 							aria-label="Connect with me on linkedin"
 							type="button"
-							class="bg-accent p-3 rounded-2xl flex items-center"
+							class="flex items-center rounded-2xl bg-accent p-3"
 						>
 							<span>
 								<ExternalLink></ExternalLink>
@@ -53,17 +51,15 @@
 						>
 					</a>
 				</div>
-				<div
-					class="text-2xl w-screen mt-5 items-center place-items-center"
-				>
+				<div class="mt-5 w-screen place-items-center items-center text-2xl">
 					<a
 						href="mailto:simon@codebysimon.com?subject=Hello%20Simon"
-						class="flex justify-center items-center"
+						class="flex items-center justify-center"
 					>
 						<button
 							aria-label="Email me"
 							type="button"
-							class="bg-accent p-3 rounded-2xl flex items-center"
+							class="flex items-center rounded-2xl bg-accent p-3"
 						>
 							<span>
 								<Mail></Mail>
