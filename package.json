@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.45.3",
-		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-static": "^3.0.11",
 		"@sveltejs/enhanced-img": "^0.4.1",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
@@ -36,7 +36,6 @@
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^5.0.0",
-		"svelte-adapter-azure-swa": "^0.20.1",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.14",
 		"typescript": "^5.0.0",
@@ -48,8 +47,6 @@
 		"@inlang/paraglide-sveltekit": "^0.11.1",
 		"@inlang/paraglide-vite": "^1.2.76",
 		"@lottiefiles/dotlottie-web": "^0.36.1",
-		"@notionhq/client": "^2.2.15",
-		"@sendgrid/mail": "^8.1.4",
 		"lucide-svelte": "^0.468.0",
 		"sharp": "^0.33.5"
 	}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
 	import TypingAnimation from "./TypingAnimation.svelte";
 	import handsImg from "$lib/assets/workingHands.jpeg";
 	import * as m from "$lib/paraglide/messages";
@@ -67,7 +68,7 @@
 			<div>
 				<div class="flex-1 md:p-5">
 					<a
-						href="/contact"
+						href="{base}/contact"
 						class="flex justify-center items-center mt-4 text-tertiary"
 					>
 						<button

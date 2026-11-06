@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
 	import { fly } from "svelte/transition";
 	import { backOut } from "svelte/easing";
 	import { onMount } from "svelte";
@@ -32,7 +33,7 @@
 					Code By Simon
 				</h1>
 				<div class="text-2xl w-screen items-center place-items-center">
-					<a href="/contact" class="flex justify-center items-center">
+					<a href="{base}/contact" class="flex justify-center items-center">
 						<button
 							aria-label="Contact me"
 							type="button"
