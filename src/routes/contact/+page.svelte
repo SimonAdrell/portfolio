@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
-	import myfaceSvg from '$lib/assets/myface.svg?raw';
+	import myface from '$lib/assets/myface.svg';
 	import { Mail, ExternalLink } from 'lucide-svelte';
 
 	let ready = false;
@@ -25,7 +25,7 @@
 			>
 				<div class="flex w-screen place-items-center items-center justify-center">
 					<div>
-						{@html myfaceSvg}
+						<img src={myface} alt="" width="300" height="300" />
 					</div>
 				</div>
 				<h1

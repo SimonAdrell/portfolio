@@ -67,3 +67,12 @@ test('custom domain files point at https://codebysimon.com', () => {
 	expect(locs.length).toBeGreaterThan(0);
 	for (const [, url] of locs) expect(url).toMatch(/^https:\/\/codebysimon\.com\//);
 });
+
+for (const p of ['', 'about', 'contact']) {
+	test(`face illustration is a decorative img on /${p}`, async ({ page }) => {
+		await page.goto(`./${p}`);
+		const face = page.locator('img[src*="myface"]');
+		await expect(face).toHaveCount(1);
+		await expect(face).toHaveAttribute('alt', '');
+	});
+}

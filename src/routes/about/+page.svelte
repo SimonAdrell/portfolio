@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import * as m from '$lib/paraglide/messages';
-	import myfaceSvg from '$lib/assets/myface.svg?raw';
+	import myface from '$lib/assets/myface.svg';
 	import { fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
 	import { backOut } from 'svelte/easing';
@@ -44,7 +44,7 @@
 		class="flex h-4/6 flex-col place-items-center bg-tertiary text-primary dark:text-primaryDark dark:text-secondaryDark"
 	>
 		<div class="mt-[-5rem] flex-1">
-			{@html myfaceSvg}
+			<img src={myface} alt="" width="300" height="300" />
 		</div>
 		<h2 class=" flex-1 text-2xl md:text-3xl">
 			{m.aboutTagline()}

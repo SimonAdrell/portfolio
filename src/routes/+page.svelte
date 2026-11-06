@@ -3,7 +3,7 @@
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import myfaceSvg from '$lib/assets/myface.svg?raw';
+	import myface from '$lib/assets/myface.svg';
 	import { Send } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages';
 	let ready = false;
@@ -22,7 +22,7 @@
 			>
 				<div class="flex w-screen place-items-center items-center justify-center">
 					<div>
-						{@html myfaceSvg}
+						<img src={myface} alt="" width="300" height="300" />
 					</div>
 				</div>
 				<h1
