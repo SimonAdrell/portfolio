@@ -22,7 +22,8 @@ const RULES = [
 	]
 ];
 
-for (const [pattern, reason] of RULES) if (pattern.test(command) && !/\.env\.example/.test(command)) block(reason);
+for (const [pattern, reason] of RULES)
+	if (pattern.test(command) && !/\.env\.example/.test(command)) block(reason);
 
 function block(reason) {
 	process.stderr.write(`Blocked by .claude/hooks/guard-shell.mjs: ${reason}`);

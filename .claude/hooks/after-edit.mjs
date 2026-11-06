@@ -7,7 +7,8 @@ const input = JSON.parse(await readStdin());
 const file = input?.tool_input?.file_path ?? '';
 const root = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
 
-if (!/\.(ts|js|mjs|cjs|svelte|css)$/.test(file) || /node_modules|\.svelte-kit/.test(file)) process.exit(0);
+if (!/\.(ts|js|mjs|cjs|svelte|css)$/.test(file) || /node_modules|\.svelte-kit/.test(file))
+	process.exit(0);
 const fromRoot = relative(root, resolve(file));
 if (fromRoot.startsWith('..') || isAbsolute(fromRoot)) process.exit(0);
 
@@ -15,7 +16,9 @@ run(`npx --no-install prettier --write "${file}"`);
 if (!/\.css$/.test(file)) {
 	const lint = run(`npx --no-install eslint --cache --fix --max-warnings 0 "${file}"`);
 	if (lint) {
-		process.stderr.write(`ESLint (${file}):\n${lint.slice(0, 6000)}\n\nFix these before continuing. Do not disable rules to make them pass.`);
+		process.stderr.write(
+			`ESLint (${file}):\n${lint.slice(0, 6000)}\n\nFix these before continuing. Do not disable rules to make them pass.`
+		);
 		process.exit(2);
 	}
 }

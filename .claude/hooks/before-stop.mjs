@@ -8,7 +8,12 @@ const cwd = input?.cwd ?? process.cwd();
 if (!codeChanged()) process.exit(0);
 
 try {
-	execSync('npm run verify --silent', { cwd, stdio: 'pipe', encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+	execSync('npm run verify --silent', {
+		cwd,
+		stdio: 'pipe',
+		encoding: 'utf8',
+		maxBuffer: 64 * 1024 * 1024
+	});
 } catch (e) {
 	const out = `${e.stdout ?? ''}${e.stderr ?? ''}`.trim().slice(0, 8000);
 	if (input?.stop_hook_active) {

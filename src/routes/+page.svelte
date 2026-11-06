@@ -1,43 +1,41 @@
 <script lang="ts">
-	import { base } from "$app/paths";
-	import { fly } from "svelte/transition";
-	import { backOut } from "svelte/easing";
-	import { onMount } from "svelte";
-	import myfaceSvg from "$lib/assets/myface.svg?raw";
-	import { Send } from "lucide-svelte";
-	import * as m from "$lib/paraglide/messages";
+	import { base } from '$app/paths';
+	import { fly } from 'svelte/transition';
+	import { backOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
+	import myfaceSvg from '$lib/assets/myface.svg?raw';
+	import { Send } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages';
 	let ready = false;
 	onMount(() => (ready = true));
 </script>
 
 <div class="flex w-screen items-center align-middle">
-	<div class="items-center justify-center text-center flex">
+	<div class="flex items-center justify-center text-center">
 		{#if ready}
 			<header
 				in:fly={{
 					y: 70,
 					delay: 10,
-					easing: backOut,
+					easing: backOut
 				}}
 			>
-				<div
-					class="w-screen justify-center place-items-center flex items-center"
-				>
+				<div class="flex w-screen place-items-center items-center justify-center">
 					<div>
 						{@html myfaceSvg}
 					</div>
 				</div>
 				<h1
-					class=" text-8xl w-screen font-SimonsHandwriting text-tertiary dark:text-tertiaryDark md:text-9xl lg:text-10xl text-center"
+					class=" lg:text-10xl w-screen text-center font-SimonsHandwriting text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
 				>
 					Code By Simon
 				</h1>
-				<div class="text-2xl w-screen items-center place-items-center">
-					<a href="{base}/contact" class="flex justify-center items-center">
+				<div class="w-screen place-items-center items-center text-2xl">
+					<a href="{base}/contact" class="flex items-center justify-center">
 						<button
 							aria-label="Contact me"
 							type="button"
-							class="bg-accent p-3 rounded-2xl flex items-center"
+							class="flex items-center rounded-2xl bg-accent p-3"
 						>
 							<span>
 								<Send></Send>
