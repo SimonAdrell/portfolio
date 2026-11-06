@@ -25,7 +25,7 @@
 			<div class="flex-1 hidden md:flex p-4 justify-end">
 				<div class="hidden md:block">
 					<div class="ml-10 flex items-baseline space-x-4 font-thin">
-						{#each navOptions as option, i}
+						{#each navOptions as option}
 							<div>
 								<a
 									href={option.href}
@@ -63,7 +63,7 @@
 						class="float-right min-h-full w-[65%] bg-primary dark:bg-primaryDark dark:text-tertiaryDark text-tertiary px-6 pt-12 shadow-2xl"
 					>
 						<menu>
-							{#each navOptions as option, i}
+							{#each navOptions as option}
 								<li class="m-2">
 									<a
 										href={option.href}
