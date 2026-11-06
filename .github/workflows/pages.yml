@@ -21,8 +21,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm ci
+      # package-lock.json is gitignored, so npm ci and the npm cache are unavailable.
+      - run: npm install
       - run: npm run build
         env:
           BASE_PATH: /portfolio
