@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { navOptions } from './nav.svelte';
+	import { base } from '$app/paths';
 	let visible = $state(false);
-	const isStartPage = (): boolean => page.url.pathname != '/';
+	const isStartPage = (): boolean => page.url.pathname != `${base}/`;
 	const toggleVisibility = () => {
 		visible = !visible;
 	};
@@ -13,7 +14,7 @@
 		<div class="flex h-16">
 			<div class="flex-1 md:p-4">
 				{#if isStartPage()}
-					<a href="/" title="Start">
+					<a href="{base}/" title="Start">
 						<span class="font-SimonsHandwriting text-6xl text-orange md:text-8xl md:leading-6"
 							>Code By Simon</span
 						>

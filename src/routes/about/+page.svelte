@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import * as m from '$lib/paraglide/messages';
 	import myfaceSvg from '$lib/assets/myface.svg?raw';
 	import { fly } from 'svelte/transition';
@@ -119,7 +120,7 @@
 					</div>
 				</div>
 				<div>
-					<a href="/contact" class="mt-4 flex items-center justify-center text-tertiary">
+					<a href="{base}/contact" class="mt-4 flex items-center justify-center text-tertiary">
 						<button
 							aria-label="Contact me"
 							type="button"
