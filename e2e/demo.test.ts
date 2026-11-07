@@ -95,3 +95,12 @@ test.describe('contact page with reduced motion', () => {
 		await expect(header).toHaveCSS('animation-name', 'none');
 	});
 });
+
+for (const p of ['', 'about', 'contact']) {
+	test(`face illustration is a decorative img on /${p}`, async ({ page }) => {
+		await page.goto(`./${p}`);
+		const face = page.locator('img[src*="myface"]');
+		await expect(face).toHaveCount(1);
+		await expect(face).toHaveAttribute('alt', '');
+	});
+}

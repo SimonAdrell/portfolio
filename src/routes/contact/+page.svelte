@@ -1,5 +1,5 @@
 <script lang="ts">
-	import myfaceSvg from '$lib/assets/myface.svg?raw';
+	import myface from '$lib/assets/myface.svg';
 	import { Mail, ExternalLink } from 'lucide-svelte';
 </script>
 
@@ -12,7 +12,7 @@
 		<header class="slide-in">
 			<div class="flex w-screen place-items-center items-center justify-center">
 				<div>
-					{@html myfaceSvg}
+					<img src={myface} alt="" width="300" height="300" />
 				</div>
 			</div>
 			<h1
