@@ -68,6 +68,34 @@ test('custom domain files point at https://codebysimon.com', () => {
 	for (const [, url] of locs) expect(url).toMatch(/^https:\/\/codebysimon\.com\//);
 });
 
+test.describe('contact page without JavaScript', () => {
+	test.use({ javaScriptEnabled: false });
+	for (const locale of locales) {
+		test(`content is visible in ${locale || 'en'}`, async ({ page }) => {
+			await page.goto(`./${locale}contact`);
+			await expect(page.locator('h1')).toBeVisible();
+			await expect(page.locator('a[href^="mailto:"]')).toBeVisible();
+			await expect(page.locator('a[href*="linkedin.com"]')).toBeVisible();
+		});
+	}
+	test('slide-in ends fully visible', async ({ page }) => {
+		await page.goto('./contact');
+		const header = page.locator('header').filter({ has: page.locator('h1') });
+		await header.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)));
+		await expect(header).toHaveCSS('opacity', '1');
+	});
+});
+
+test.describe('contact page with reduced motion', () => {
+	test.use({ reducedMotion: 'reduce' });
+	test('content has no animation', async ({ page }) => {
+		await page.goto('./contact');
+		const header = page.locator('header').filter({ has: page.locator('h1') });
+		await expect(header).toBeVisible();
+		await expect(header).toHaveCSS('animation-name', 'none');
+	});
+});
+
 for (const p of ['', 'about', 'contact']) {
 	test(`face illustration is a decorative img on /${p}`, async ({ page }) => {
 		await page.goto(`./${p}`);
