@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	export const navOptions = [
 		{ page: m.aboutMe(), href: '/about' },
