@@ -10,6 +10,9 @@ const paraglidePreprocess = paraglide({
 })
 	.map((p) => p.api?.sveltePreprocess)
 	.find(Boolean);
+if (!paraglidePreprocess) {
+	throw new Error('Paraglide preprocessor not found; localised links would break. See TAS-258.');
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
