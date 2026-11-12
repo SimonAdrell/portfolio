@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import myface from '$lib/assets/myface.svg';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 	let ready = false;
 	onMount(() => (ready = true));
@@ -31,7 +31,7 @@
 					Code By Simon
 				</h1>
 				<div class="w-screen place-items-center items-center text-2xl">
-					<a href="{base}/contact" class="flex items-center justify-center">
+					<a href={resolve('/contact')} class="flex items-center justify-center">
 						<button
 							aria-label="Contact me"
 							type="button"

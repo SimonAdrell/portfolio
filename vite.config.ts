@@ -6,7 +6,9 @@ export default defineConfig({
 		sveltekit(),
 		paraglide({
 			project: './project.inlang',
-			outdir: './src/lib/paraglide'
+			outdir: './src/lib/paraglide',
+			// Registered in svelte.config.js instead; see the note there.
+			disablePreprocessor: true
 		})
 	],
 	test: {
