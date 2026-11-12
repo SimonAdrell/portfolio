@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import mysadfaceSvg from '$lib/assets/sadFace.png';
 	import { Send } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
@@ -27,7 +27,7 @@
 				{message}
 			</h1>
 			<div class="w-screen place-items-center items-center text-2xl">
-				<a href="{base}/contact" class="flex items-center">
+				<a href={resolve('/contact')} class="flex items-center">
 					<button
 						aria-label="Contact me"
 						type="button"

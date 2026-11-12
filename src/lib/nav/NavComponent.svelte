@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { navOptions } from './nav.svelte';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	let visible = $state(false);
-	const isStartPage = (): boolean => page.url.pathname != `${base}/`;
+	const isStartPage = (): boolean => page.url.pathname != resolve('/');
 	const toggleVisibility = () => {
 		visible = !visible;
 	};
@@ -14,7 +14,7 @@
 		<div class="flex h-16">
 			<div class="flex-1 md:p-4">
 				{#if isStartPage()}
-					<a href="{base}/" title="Start">
+					<a href={resolve('/')} title="Start">
 						<span class="font-SimonsHandwriting text-6xl text-orange md:text-8xl md:leading-6"
 							>Code By Simon</span
 						>
@@ -24,12 +24,12 @@
 			<div class="hidden flex-1 justify-end p-4 md:flex">
 				<div class="hidden md:block">
 					<div class="ml-10 flex items-baseline space-x-4 font-thin">
-						{#each navOptions as option}
+						{#each navOptions as option (option.href)}
 							<div>
 								<a
-									href={option.href}
+									href={resolve(option.href)}
 									class=" pt-2 text-xl text-secondary underline-offset-1 transition-all duration-100 hover:pt-4 hover:text-tertiary aria-[current=true]:text-2xl aria-[current=true]:text-tertiary dark:text-secondaryDark hover:dark:text-tertiaryDark aria-[current=trye]:dark:text-tertiaryDark"
-									aria-current={page.url.pathname === option.href}>{option.page}</a
+									aria-current={page.url.pathname === resolve(option.href)}>{option.page}</a
 								>
 							</div>
 						{/each}
@@ -53,12 +53,12 @@
 						class="float-right min-h-full w-[65%] bg-primary px-6 pt-12 text-tertiary shadow-2xl dark:bg-primaryDark dark:text-tertiaryDark"
 					>
 						<menu>
-							{#each navOptions as option}
+							{#each navOptions as option (option.href)}
 								<li class="m-2">
 									<a
-										href={option.href}
+										href={resolve(option.href)}
 										class=" rounded-md px-3 py-2 text-2xl hover:text-white"
-										aria-current={page.url.pathname === option.href}
+										aria-current={page.url.pathname === resolve(option.href)}
 										onclick={toggleVisibility}>{option.page}</a
 									>
 								</li>
