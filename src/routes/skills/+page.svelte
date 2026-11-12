@@ -3,7 +3,7 @@
 	import TypingAnimation from './TypingAnimation.svelte';
 	import handsImg from '$lib/assets/workingHands.jpeg';
 	import * as m from '$lib/paraglide/messages';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 </script>
 
 <div

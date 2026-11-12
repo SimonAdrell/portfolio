@@ -1,6 +1,6 @@
 <script lang="ts">
 	import myface from '$lib/assets/myface.svg';
-	import { Mail, ExternalLink } from 'lucide-svelte';
+	import { Mail, ExternalLink } from '@lucide/svelte';
 </script>
 
 <svelte:head>

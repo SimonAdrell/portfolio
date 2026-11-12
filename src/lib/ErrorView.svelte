@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import mysadfaceSvg from '$lib/assets/sadFace.png';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 
 	let { status, message }: { status: number; message?: string } = $props();

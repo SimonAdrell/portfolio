@@ -7,7 +7,7 @@
 	import { backOut } from 'svelte/easing';
 	import portrait from '$lib/assets/porttrait.jpg';
 	import rutImg from '$lib/assets/rutImg.jpeg';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 
 	let ready = $state(false);
 	onMount(() => (ready = true));

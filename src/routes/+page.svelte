@@ -4,7 +4,7 @@
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import myface from '$lib/assets/myface.svg';
-	import { Send } from 'lucide-svelte';
+	import { Send } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 	let ready = false;
 	onMount(() => (ready = true));
