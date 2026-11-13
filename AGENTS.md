@@ -2,7 +2,7 @@
 
 ## Stack
 
-SvelteKit 2 + Svelte 5, Tailwind CSS 3, Paraglide i18n (`messages/`, `project.inlang/`). Static portfolio site, no backend.
+SvelteKit 2 + Svelte 5, Tailwind CSS 4, Paraglide i18n (`messages/`, `project.inlang/`). Static portfolio site, no backend.
 
 ## Commands
 
