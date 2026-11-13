@@ -1,4 +1,4 @@
-// npm run verify: svelte-check, lint, unit tests and knip (unused files, exports, deps) side by side. One line per step, then the output of each
+// npm run verify: svelte-check, lint, unit tests and knip side by side. One line per step, then the output of each
 // step that failed (capped, so the stop hook's 8000 characters show every failing step).
 import { exec } from 'node:child_process';
 
