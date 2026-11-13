@@ -8,36 +8,56 @@ try {
 	block('could not read the command, so it was not checked.');
 }
 
+// The command without heredoc bodies, line continuations and quoted text, so a commit message or PR body
+// that only mentions a command passes, and a flag after a multi-line message still counts.
+// shortcut: a `"` inside a quoted string ends it early; a mention after that point blocks. Reword it.
+const bare = command
+	.replace(/<<-?\s*(['"]?)(\w+)\1([^\n]*)\n[\s\S]*?\n\s*\2(?=\r?\n|$)/g, '<<$3')
+	.replace(/[\\`]\r?\n/g, ' ')
+	.replace(/"[^"]*"|'[^']*'/g, '""');
+// Env-file names with the safe example file taken out, so `cat .env.example .env` still blocks.
+const noExample = command.replace(/\.env\.example\b/gi, '');
+
 // A command starts at the beginning of the line or after ; & | ( or a newline.
-// Match in command position so text that only mentions a command (PR bodies, echo) passes.
 const CMD = String.raw`(?:^|[;&|(\n]\s*)`;
+const HOOKS = 'Never skip git hooks. Fix what the hook reports.';
 const RULES = [
-	// Scans to the end, so the flag after a heredoc, a multi-line or `a & b` message still counts.
-	// shortcut: a git command whose message or any later part mentions --no-verify also blocks; reword it.
+	[bare, new RegExp(String.raw`${CMD}git\b[^;&|\n]*\s--no-verify\b`, 'i'), HOOKS],
+	// -n is --no-verify for commit only; for push it means dry run.
+	[bare, new RegExp(String.raw`${CMD}git\s+commit\b[^;&|\n]*\s-[a-zA-Z]*n`), HOOKS],
 	[
-		new RegExp(String.raw`${CMD}git\b[\s\S]*\s--no-verify\b`, 'i'),
-		'Never skip git hooks. Fix what the hook reports.'
-	],
-	[
-		new RegExp(String.raw`${CMD}(npx\s+|npm\s+exec\s+|\S*[/\\])?dotenv\b`, 'i'),
+		bare,
+		new RegExp(
+			String.raw`${CMD}(?:(?:npx|bunx|node|pnpm\s+(?:dlx|exec)|yarn(?:\s+dlx)?|npm\s+exec)(?:\s+-\S*)*\s+)?\S*dotenv(?:x|-cli)?\b`,
+			'i'
+		),
 		'Running dotenv directly can print secrets.'
 	],
 	[
-		/(^|[\s'"`=/\\<>(:])(\.env(\.[\w-]+)?|sendgrid\.env)(?![\w.-])/i,
-		'Secret env files are off limits. Use the *.example files.',
-		/\.env\.example/
+		noExample,
+		/(^|[\s'"`=/\\<>(:])(\.env(\.[\w-]+)*|sendgrid\.env)(?![\w.-])/i,
+		'Secret env files are off limits. Use the *.example files.'
 	],
 	[
+		command,
 		new RegExp(
-			String.raw`${CMD}(env|set|printenv|export\s+-p)\s*($|[;&|)])|\bprintenv\b|\b(Get-ChildItem|gci|ls|dir)\s+env:|\$env:\w*(TOKEN|KEY|SECRET)`,
+			[
+				String.raw`${CMD}(env|set|printenv|export(\s+-p)?|declare\s+-[px])\s*($|[;&|)])`,
+				String.raw`\bprintenv\b`,
+				String.raw`\bcmd(\.exe)?\s+/c\s+set\s*($|[;&|)"'])`,
+				String.raw`\b(Get-ChildItem|gci|ls|dir)\s+env:`,
+				String.raw`\benv:\w*(TOKEN|KEY|SECRET)`,
+				String.raw`\bGetEnvironmentVariables\b`,
+				String.raw`\bGetEnvironmentVariable\(\s*['"]\w*(TOKEN|KEY|SECRET)`,
+				String.raw`\$\{?\w*(TOKEN|KEY|SECRET)\b`
+			].join('|'),
 			'i'
 		),
 		"Don't print environment secrets."
 	]
 ];
 
-for (const [pattern, reason, allow] of RULES)
-	if (pattern.test(command) && !allow?.test(command)) block(reason);
+for (const [text, pattern, reason] of RULES) if (pattern.test(text)) block(reason);
 
 function block(reason) {
 	process.stderr.write(`Blocked by .claude/hooks/guard-shell.mjs: ${reason}`);
