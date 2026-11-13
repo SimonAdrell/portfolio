@@ -1,16 +1,20 @@
 // Runs after every file edit. Formats and lints that one file. Type-checking runs in npm run verify.
 // Exit 2 sends the errors back to Claude so it fixes them right away.
 import { execSync } from 'node:child_process';
-import { isAbsolute, relative, resolve } from 'node:path';
+import { existsSync } from 'node:fs';
+import { dirname, isAbsolute, relative, resolve } from 'node:path';
 
 const input = JSON.parse(await readStdin());
 const file = input?.tool_input?.file_path ?? '';
-const root = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
+const project = process.env.CLAUDE_PROJECT_DIR ?? process.cwd();
 
 if (!/\.(ts|js|mjs|cjs|svelte|css)$/.test(file) || /node_modules|\.svelte-kit/.test(file))
 	process.exit(0);
-const fromRoot = relative(root, resolve(file));
+// Files outside the project (e.g. scratch files) aren't ours to lint.
+const fromRoot = relative(project, resolve(file));
 if (fromRoot.startsWith('..') || isAbsolute(fromRoot)) process.exit(0);
+// Lint from the checkout that owns the file (a worktree under .claude/worktrees/ has its own config).
+const cwd = findRoot(resolve(file));
 
 run(`npx --no-install prettier --write "${file}"`);
 if (!/\.css$/.test(file)) {
@@ -25,11 +29,19 @@ if (!/\.css$/.test(file)) {
 
 function run(cmd) {
 	try {
-		execSync(cmd, { cwd: root, stdio: 'pipe', encoding: 'utf8' });
+		execSync(cmd, { cwd, stdio: 'pipe', encoding: 'utf8' });
 		return '';
 	} catch (e) {
 		return `${e.stdout ?? ''}${e.stderr ?? ''}`.trim();
 	}
+}
+// Nearest folder with eslint.config.js and its own node_modules; a worktree without npm install
+// falls back to the project folder.
+function findRoot(path) {
+	for (let dir = dirname(path); dir !== dirname(dir); dir = dirname(dir))
+		if (existsSync(resolve(dir, 'eslint.config.js')))
+			return existsSync(resolve(dir, 'node_modules')) ? dir : project;
+	return project;
 }
 function readStdin() {
 	return new Promise((res) => {

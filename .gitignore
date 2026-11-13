@@ -42,3 +42,6 @@ sendgrid.env
 
 # Paraglide compiles these from messages/ on every build.
 /src/lib/paraglide
+
+# Written by the after-edit hook
+.eslintcache
