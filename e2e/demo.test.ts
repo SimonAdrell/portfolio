@@ -22,7 +22,7 @@ const sections = {
 		'Serveras på',
 		'Näringsvärde',
 		'Kockens anteckningar',
-		'Vill du ha en sats?'
+		'Vill du ha en portion?'
 	]
 };
 const h1 = { '': "Simon's gel", 'se/': 'Simons gel' };
@@ -184,6 +184,14 @@ test('both start pages are prerendered with their content', () => {
 	expect(readFileSync(resolve(build, 'index.html'), 'utf8')).toContain(`>Simon's gel</h1>`);
 	expect(readFileSync(resolve(build, 'se.html'), 'utf8')).toContain('>Simons gel</h1>');
 	expect(existsSync(resolve(build, '404.html'))).toBe(true);
+});
+
+test('start pages ship no JavaScript', () => {
+	for (const f of ['index.html', 'se.html']) {
+		const html = readFileSync(resolve(build, f), 'utf8');
+		expect(html, f).not.toContain('<script');
+		expect(html, f).not.toContain('modulepreload');
+	}
 });
 
 test.describe('without JavaScript', () => {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
-	import keyboard from '$lib/assets/workingHands.jpeg';
+	import keyboard from '$lib/assets/workingHands.webp';
 	import { agents, batches, facts, howIBuild, ingredients, nutrition, steps } from '$lib/recipe';
 
 	const nav = [
@@ -55,7 +55,7 @@
 				</dl>
 			</div>
 			<figure class="photo">
-				<img src={keyboard} alt={m.photoAlt()} width="2054" height="2054" />
+				<img src={keyboard} alt={m.photoAlt()} width="1200" height="900" />
 				<figcaption class="cbs-caption">{m.photoCaption()}</figcaption>
 			</figure>
 		</section>
@@ -66,12 +66,12 @@
 				<ul class="plain">
 					{#each ingredients as it (it.name)}
 						<li class="ing">
-							<span>{it.name()}</span><span class="ing-dots" aria-hidden="true"></span><span
-								class="sr">:</span
-							>
-							<span class="ing-amt"
-								>{#if it.was}<s>{it.was()}</s>
-								{/if}{it.amount()}</span
+							<span>{it.name()}</span><span class="ing-tail"
+								><span class="ing-dots" aria-hidden="true"></span><span class="sr">:</span>
+								<span class="ing-amt"
+									>{#if it.was}<s>{it.was()}</s>
+									{/if}{it.amount()}</span
+								></span
 							>
 						</li>
 					{/each}
@@ -228,6 +228,7 @@
 		position: absolute;
 		width: 1px;
 		height: 1px;
+		margin: -1px;
 		overflow: hidden;
 		clip: rect(0 0 0 0);
 		white-space: nowrap;
@@ -400,14 +401,23 @@
 	}
 	.ing {
 		display: flex;
+		/* a long name pushes the leader and amount onto their own line */
+		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--space-3);
+		gap: 0 var(--space-3);
 		min-height: 44px;
 		font: 400 17px/28px var(--font-sans);
 	}
+	/* leader and amount wrap together, so the amount keeps its leader */
+	.ing-tail {
+		position: relative;
+		flex: 1 1 auto;
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
 	.ing-dots {
-		flex: 1;
-		min-width: var(--space-6);
+		flex: 1 1 var(--space-6);
 		border-bottom: 1px dotted var(--ink-muted);
 		align-self: flex-end;
 		margin-bottom: var(--space-3);
@@ -416,6 +426,7 @@
 		font: 500 14px/20px var(--font-mono);
 		color: var(--ink-muted);
 		text-align: right;
+		white-space: nowrap;
 	}
 	.ing-amt s {
 		margin-right: var(--space-2);

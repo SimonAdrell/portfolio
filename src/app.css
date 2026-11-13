@@ -249,6 +249,9 @@
 
 	.cbs-handnote {
 		display: inline-flex;
+		/* the 88 px fallback font is far wider than the handwriting; break words rather than overflow */
+		max-width: 100%;
+		overflow-wrap: anywhere;
 		align-items: center;
 		gap: var(--space-2);
 		font: 400 88px/0.65 var(--font-hand);

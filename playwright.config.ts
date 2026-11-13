@@ -7,7 +7,8 @@ export default defineConfig({
 		port: 4173,
 		// Local builds can exceed the 60 s default.
 		timeout: 180_000,
-		reuseExistingServer: !process.env.CI
+		// Never reuse: a stale preview on 4173 would test an old build without saying so.
+		reuseExistingServer: false
 	},
 	use: { baseURL: 'http://localhost:4173/' },
 	testDir: 'e2e'
