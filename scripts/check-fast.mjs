@@ -1,8 +1,8 @@
-// npm run verify: svelte-check, lint and unit tests side by side. One line per step, then the output of each
+// npm run verify: svelte-check, lint, unit tests and knip side by side. One line per step, then the output of each
 // step that failed (capped, so the stop hook's 8000 characters show every failing step).
 import { exec } from 'node:child_process';
 
-const steps = ['check', 'lint', 'test:unit -- --run'];
+const steps = ['check', 'lint', 'test:unit -- --run', 'knip'];
 
 const results = await Promise.all(
 	steps.map(

@@ -6,7 +6,7 @@ SvelteKit 3 + Svelte 5, Tailwind CSS 4, Paraglide 3 i18n (`messages/`, `project.
 
 ## Commands
 
-- `npm run verify`: svelte-check, prettier + ESLint and unit tests in parallel; prints only what failed. The full gate: run it before you commit or open a PR. Runs automatically when you end a turn with changed code.
+- `npm run verify`: svelte-check, prettier + ESLint, unit tests and knip in parallel (an unused file, export or dependency fails: delete it, don't ignore it); prints only what failed. The full gate: run it before you commit or open a PR. Runs automatically when you end a turn with changed code.
 - `npm run test:e2e`: Playwright (builds the site first).
 - `npm run dev`: dev server.
 - Pre-commit hook (husky): Prettier and ESLint on staged files. Every new worktree needs `npm install` first, or the hook silently doesn't run.
