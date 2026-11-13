@@ -4,6 +4,7 @@ import { execFileSync, execSync } from 'node:child_process';
 import { copyFileSync, existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { isGate } from './gate-running.mjs';
 
 const input = JSON.parse(await readStdin());
 // The session's own checkout (a worktree under .claude/worktrees/ is ignored by the main one).
@@ -89,9 +90,7 @@ function codeChanged() {
 	}
 }
 // A gate already runs in this checkout (verify, `vitest run`, Playwright, often in the background while
-// Claude waits), so don't run a second one beside it. Signal: a node process from this checkout's node_modules
-// running svelte-check, ESLint, Prettier, Playwright, `vitest run` or `vite build`/`vite preview`.
-// `vite dev`, watch-mode vitest, --watch and --ui don't count.
+// Claude waits), so don't run a second one beside it. Which processes count: gate-running.mjs.
 // shortcut: a process scan, not a lock file, so a killed run leaves no lock. A partial run (one test file,
 // e2e only) also skips; match full-gate signatures if that bites.
 function gateRunning() {
@@ -108,19 +107,7 @@ function gateRunning() {
 						{ encoding: 'utf8' }
 					)
 				: execFileSync('ps', ['-axww', '-o', 'command'], { encoding: 'utf8' });
-		const norm = (s) =>
-			s.toLowerCase().replaceAll('\\', '/').replaceAll('"', '').replace(/\/+/g, '/');
-		const modules = `${norm(cwd)}/node_modules/`;
-		return norm(list)
-			.split('\n')
-			.some(
-				(line) =>
-					line.includes(modules) &&
-					!/--watch|--ui\b/.test(line) &&
-					(/\/(@playwright|playwright|eslint|svelte-check|prettier)\//.test(line) ||
-						/\/vitest\/\S*\s(.*\s)?(run|--run)(\s|$)/.test(line) ||
-						/\/vite\/bin\/vite\.js\s+(build|preview)\b/.test(line))
-			);
+		return list.split('\n').some((line) => isGate(line, cwd));
 	} catch {
 		return false;
 	}
