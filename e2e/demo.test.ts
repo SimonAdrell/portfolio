@@ -3,7 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const build = resolve(import.meta.dirname, '../build');
-const locales = ['', 'se/'];
+const locales = ['', 'sv/'];
 
 const sections = {
 	'': [
@@ -15,7 +15,7 @@ const sections = {
 		"Chef's notes",
 		'Want a batch?'
 	],
-	'se/': [
+	'sv/': [
 		'Ingredienser',
 		'Gör så här',
 		'På spisen',
@@ -25,7 +25,7 @@ const sections = {
 		'Vill du ha en portion?'
 	]
 };
-const h1 = { '': "Simon's gel", 'se/': 'Simons gel' };
+const h1 = { '': "Simon's gel", 'sv/': 'Simons gel' };
 
 // Each card section's name: its trail-marker label when it has one ("On the stove · …"), else its h2.
 const sectionNames = (page: Page) =>
@@ -55,8 +55,8 @@ for (const locale of locales) {
 
 	test(`recipe nav scrolls to its section (${name})`, async ({ page }) => {
 		await page.setViewportSize({ width: 1280, height: 800 });
-		// The canonical URLs (sitemap): / and /se. A link must scroll this document, not load another.
-		const path = `/${locale.replace('/', '')}`;
+		// The canonical URLs (sitemap): / and /sv/. A link must scroll this document, not load another.
+		const path = `/${locale}`;
 		await page.goto(`.${path}`);
 		await page.evaluate(() => ((window as unknown as { stay: boolean }).stay = true));
 		const links = page.getByRole('navigation').getByRole('link');
@@ -134,7 +134,7 @@ for (const locale of locales) {
 }
 
 test('Swedish start page has no English copy', async ({ page }) => {
-	await page.goto('./se/');
+	await page.goto('./sv/');
 	const text = await page.locator('body').innerText();
 	for (const en of [
 		"Simon's gel",
@@ -185,7 +185,7 @@ const nutrition = {
 			/Bugs\s*traces may occur/
 		]
 	},
-	'se/': {
+	'sv/': {
 		title: 'Näringsvärde',
 		serving: 'Per portion: en backendutvecklare',
 		rows: [
@@ -218,7 +218,7 @@ test('struck-through amount reads as was / now', async ({ page }) => {
 
 test('both start pages are prerendered with their content', () => {
 	expect(readFileSync(resolve(build, 'index.html'), 'utf8')).toContain(`>Simon's gel</h1>`);
-	expect(readFileSync(resolve(build, 'se.html'), 'utf8')).toContain('>Simons gel</h1>');
+	expect(readFileSync(resolve(build, 'sv/index.html'), 'utf8')).toContain('>Simons gel</h1>');
 	expect(existsSync(resolve(build, '404.html'))).toBe(true);
 });
 
@@ -234,14 +234,43 @@ test('in-page links stay on the page', () => {
 			const id = href.slice(href.indexOf('#') + 1);
 			expect(
 				href.startsWith('#'),
-				`${file}: link "${href}" leaves the page. Write href="#${id}" and add data-no-translate, or Paraglide rewrites it to a page path.`
+				`${file}: link "${href}" leaves the page. Write href="#${id}".`
+			).toBe(true);
+		}
+	}
+});
+
+// vite preview is lenient (/sv/ serves sv.html); GitHub Pages is not. Check links against build/ the way Pages resolves them.
+test('every site link has a file GitHub Pages can serve', () => {
+	const site = 'https://codebysimon.com';
+	const pages = readdirSync(build, { recursive: true, encoding: 'utf8' })
+		.map((f) => f.replaceAll('\\', '/'))
+		.filter((f) => f.endsWith('.html'));
+	for (const file of pages) {
+		const html = readFileSync(resolve(build, file), 'utf8');
+		const base = `${site}/${file.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '')}`;
+		const tags = html.match(/<(a|link)\s[^>]*>/g) ?? [];
+		for (const tag of tags) {
+			if (tag.startsWith('<link') && !/rel="alternate"/.test(tag)) continue;
+			const href = tag.match(/href="([^"]*)"/)?.[1];
+			if (!href || href.startsWith('#')) continue;
+			const url = new URL(href, base);
+			if (!['codebysimon.com', 'www.codebysimon.com'].includes(url.host)) continue;
+			const path = decodeURIComponent(url.pathname).slice(1);
+			const candidates =
+				path === '' || path.endsWith('/')
+					? [`${path}index.html`]
+					: [path, `${path}.html`, `${path}/index.html`];
+			expect(
+				candidates.some((c) => existsSync(resolve(build, c))),
+				`${file}: link "${href}" has no file in build/ (GitHub Pages looks for ${candidates.join(' or ')}). Point the link at a built page, or make the route build there (e.g. trailingSlash = 'always' in its +page.ts).`
 			).toBe(true);
 		}
 	}
 });
 
 test('start pages ship no JavaScript', () => {
-	for (const f of ['index.html', 'se.html']) {
+	for (const f of ['index.html', 'sv/index.html']) {
 		const html = readFileSync(resolve(build, f), 'utf8');
 		expect(html, f).not.toContain('<script');
 		expect(html, f).not.toContain('modulepreload');
@@ -261,15 +290,57 @@ for (const locale of locales) {
 	test(`404 page links back to the start page (${locale || 'en'})`, async ({ page }) => {
 		await page.goto(`./${locale}does-not-exist`);
 		await page.getByRole('main').getByRole('link').click();
-		await expect(page).toHaveURL(/localhost:4173\/(se\/?)?$/);
+		await expect(page).toHaveURL(/localhost:4173\/(sv\/?)?$/);
 		await expect(page.locator('h1')).toHaveText(/^Simon'?s gel$/);
 	});
 }
+
+const lang = { '': 'en', 'sv/': 'sv' };
+const hreflang = [
+	['en', 'https://codebysimon.com/'],
+	['sv', 'https://codebysimon.com/sv/']
+];
+for (const locale of locales) {
+	test(`start page is marked as ${lang[locale as keyof typeof lang]} and links both languages`, async ({
+		page
+	}) => {
+		await page.goto(`./${locale}`);
+		await expect(page.locator('html')).toHaveAttribute('lang', lang[locale as keyof typeof lang]);
+		const alternates = await page
+			.locator('link[rel="alternate"][hreflang]')
+			.evaluateAll((all) => all.map((l) => [l.getAttribute('hreflang'), l.getAttribute('href')]));
+		expect(alternates).toEqual(hreflang);
+	});
+}
+
+// Only the start page: on GitHub Pages every unknown URL gets the English 404.html, which preview does not mimic.
+test('internal links on the Swedish start page stay Swedish', async ({ page }) => {
+	await page.goto('./sv/');
+	const hrefs = await page
+		.locator('a[href]')
+		.evaluateAll((all) => all.map((a) => (a as HTMLAnchorElement).href));
+	const site = hrefs
+		.map((h) => new URL(h))
+		.filter((u) => ['localhost:4173', 'codebysimon.com', 'www.codebysimon.com'].includes(u.host));
+	expect(site.length).toBeGreaterThan(0);
+	for (const url of site) {
+		expect(url.pathname, url.href).toMatch(/^\/sv(\/|$)/);
+	}
+});
+
+test('old /se/ address is gone', async ({ page }) => {
+	const res = await page.goto('./se/');
+	expect(res?.status()).toBe(404);
+});
+
+test('build has no /se pages', () => {
+	expect(readdirSync(build).filter((f) => /^se(\.html)?$/.test(f))).toEqual([]);
+});
 
 test('custom domain files point at https://codebysimon.com', () => {
 	const read = (f: string) => readFileSync(resolve(build, f), 'utf8');
 	expect(read('CNAME').trim()).toBe('codebysimon.com');
 	expect(read('robots.txt')).toContain('Sitemap: https://codebysimon.com/sitemap.xml');
 	const locs = [...read('sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map(([, url]) => url);
-	expect(locs).toEqual(['https://codebysimon.com/', 'https://codebysimon.com/se']);
+	expect(locs).toEqual(['https://codebysimon.com/', 'https://codebysimon.com/sv/']);
 });

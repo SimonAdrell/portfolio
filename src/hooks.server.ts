@@ -1,4 +1,10 @@
-import type { Handle } from '@sveltejs/kit';
-import { i18n } from '$lib/i18n';
-const handleParaglide: Handle = i18n.handle();
-export const handle: Handle = handleParaglide;
+import type { Handle } from '@sveltejs/kit/hooks';
+import { paraglideMiddleware } from '#lib/paraglide/server.js';
+
+// Sets the request's locale for message functions and <html lang>; reroute (hooks.ts) handles the path.
+export const handle: Handle = ({ event, resolve }) =>
+	paraglideMiddleware(event.request, ({ locale }) =>
+		resolve(event, {
+			transformPageChunk: ({ html }) => html.replace('%paraglide.lang%', locale)
+		})
+	);
