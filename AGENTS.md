@@ -12,8 +12,9 @@ SvelteKit 2 + Svelte 5, Tailwind CSS 4, Paraglide i18n (`messages/`, `project.in
 
 ## Map
 
-- `src/routes/`: pages (`about/`, `contact/`, `skills/`).
-- `src/lib/`: shared code, `i18n.ts`, `nav/`, `assets/`.
+- `src/routes/`: the one-page site. `+page.svelte` is the recipe card (no client JS in production), `404/` prerenders `404.html`.
+- `src/lib/`: shared code. `recipe.ts` (card content as message functions), `ErrorView.svelte`, `i18n.ts`, `assets/`.
+- `src/app.css`: Code By Simon tokens, fonts and `cbs-*` classes. Self-hosted fonts live in `static/fonts/`.
 - `messages/`: translations. Never hard-code visible text; add a message key.
 - `e2e/`: Playwright page-level checks.
 

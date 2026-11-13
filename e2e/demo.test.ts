@@ -27,16 +27,15 @@ const sections = {
 };
 const h1 = { '': "Simon's gel", 'se/': 'Simons gel' };
 
-const expectInOrder = async (page: Page, texts: string[]) => {
-	// textContent, not innerText: labels are uppercased by CSS.
-	const body = (await page.locator('main').textContent()) ?? '';
-	let at = -1;
-	for (const t of texts) {
-		const i = body.indexOf(t, at + 1);
-		expect(i, `"${t}" after position ${at}`).toBeGreaterThan(at);
-		at = i;
-	}
-};
+// Each card section's name: its trail-marker label when it has one ("On the stove · …"), else its h2.
+const sectionNames = (page: Page) =>
+	page.locator('main section[aria-labelledby]').evaluateAll((all) =>
+		all.map((s) => {
+			// textContent, not innerText: labels are uppercased by CSS.
+			const label = s.querySelector('.cbs-section > .cbs-label')?.textContent;
+			return (label ? label.split(' · ')[0] : (s.querySelector('h2')?.textContent ?? '')).trim();
+		})
+	);
 
 for (const locale of locales) {
 	const name = locale || 'en';
@@ -44,7 +43,7 @@ for (const locale of locales) {
 	test(`start page is the recipe card (${name})`, async ({ page }) => {
 		await page.goto(`./${locale}`);
 		await expect(page.locator('h1')).toHaveText(h1[locale as keyof typeof h1]);
-		await expectInOrder(page, sections[locale as keyof typeof sections]);
+		expect(await sectionNames(page)).toEqual(sections[locale as keyof typeof sections]);
 	});
 
 	test(`landmarks are there once each (${name})`, async ({ page }) => {
@@ -150,16 +149,20 @@ test('Swedish start page has no English copy', async ({ page }) => {
 	}
 });
 
-test('card is not rotated and does not scroll sideways at 375 px', async ({ page }) => {
-	await page.setViewportSize({ width: 375, height: 812 });
-	await page.goto('./');
-	const { scroll, inner } = await page.evaluate(() => ({
-		scroll: document.documentElement.scrollWidth,
-		inner: window.innerWidth
-	}));
-	expect(scroll).toBeLessThanOrEqual(inner);
-	await expect(page.locator('article')).toHaveCSS('transform', 'none');
-});
+for (const locale of locales) {
+	test(`card is not rotated and does not scroll sideways at 375 px (${locale || 'en'})`, async ({
+		page
+	}) => {
+		await page.setViewportSize({ width: 375, height: 812 });
+		await page.goto(`./${locale}`);
+		const { scroll, inner } = await page.evaluate(() => ({
+			scroll: document.documentElement.scrollWidth,
+			inner: window.innerWidth
+		}));
+		expect(scroll).toBeLessThanOrEqual(inner);
+		await expect(page.locator('article')).toHaveCSS('transform', 'none');
+	});
+}
 
 test('"Send me a message" opens an email to Simon', async ({ page }) => {
 	await page.goto('./');
@@ -169,19 +172,48 @@ test('"Send me a message" opens an email to Simon', async ({ page }) => {
 	);
 });
 
-test('nutrition label lists the facts', async ({ page }) => {
+const nutrition = {
+	'': {
+		title: 'Nutrition facts',
+		serving: 'Per serving: one backend developer',
+		rows: [
+			/Backend \(\.NET, C#\)\s*70 %/,
+			/Cloud \(Azure\)\s*20 %/,
+			/Front-end\s*10 %/,
+			/Agentic development\s*every day/,
+			/Languages\s*English, Swedish/,
+			/Bugs\s*traces may occur/
+		]
+	},
+	'se/': {
+		title: 'Näringsvärde',
+		serving: 'Per portion: en backendutvecklare',
+		rows: [
+			/Backend \(\.NET, C#\)\s*70 %/,
+			/Moln \(Azure\)\s*20 %/,
+			/Frontend\s*10 %/,
+			/Agentisk utveckling\s*varje dag/,
+			/Språk\s*svenska, engelska/,
+			/Buggar\s*kan innehålla spår/
+		]
+	}
+};
+for (const locale of locales) {
+	test(`nutrition label lists the facts (${locale || 'en'})`, async ({ page }) => {
+		const n = nutrition[locale as keyof typeof nutrition];
+		await page.goto(`./${locale}`);
+		const label = page.getByRole('region', { name: n.title });
+		await expect(label).toContainText(n.serving);
+		await expect(label.locator('dl > div')).toHaveText(n.rows);
+	});
+}
+
+test('struck-through amount reads as was / now', async ({ page }) => {
 	await page.goto('./');
-	const label = page.getByRole('region', { name: 'Nutrition facts' });
-	await expect(label).toContainText('Per serving: one backend developer');
-	const rows = label.locator('dl > div');
-	await expect(rows).toHaveText([
-		/Backend \(\.NET, C#\)\s*70 %/,
-		/Cloud \(Azure\)\s*20 %/,
-		/Front-end\s*10 %/,
-		/Agentic development\s*every day/,
-		/Languages\s*English, Swedish/,
-		/Bugs\s*traces may occur/
-	]);
+	const row = page.locator('#ingredients li').filter({ hasText: 'Hand-typed code' });
+	expect((await row.textContent())?.replace(/\s+/g, ' ')).toContain(
+		'was all of it now the tricky bits'
+	);
 });
 
 test('both start pages are prerendered with their content', () => {
@@ -207,12 +239,14 @@ test.describe('without JavaScript', () => {
 	});
 });
 
-test('404 page links back to the start page', async ({ page }) => {
-	await page.goto('./does-not-exist');
-	await page.getByRole('main').getByRole('link').click();
-	await expect(page).toHaveURL(/localhost:4173\/$/);
-	await expect(page.locator('h1')).toHaveText("Simon's gel");
-});
+for (const locale of locales) {
+	test(`404 page links back to the start page (${locale || 'en'})`, async ({ page }) => {
+		await page.goto(`./${locale}does-not-exist`);
+		await page.getByRole('main').getByRole('link').click();
+		await expect(page).toHaveURL(/localhost:4173\/(se\/?)?$/);
+		await expect(page.locator('h1')).toHaveText(/^Simon'?s gel$/);
+	});
+}
 
 test('custom domain files point at https://codebysimon.com', () => {
 	const read = (f: string) => readFileSync(resolve(build, f), 'utf8');

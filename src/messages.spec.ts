@@ -35,7 +35,9 @@ const sameInBoth = new Set([
 	'nutBackendAmt',
 	'nutCloudAmt',
 	'nutFrontendAmt',
-	'linkedIn'
+	'linkedIn',
+	'contactEmail',
+	'contactLinkedIn'
 ]);
 
 describe('messages', () => {

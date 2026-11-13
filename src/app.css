@@ -190,6 +190,7 @@
 		text-underline-offset: 3px;
 	}
 	.cbs-link:hover {
+		color: var(--button-highlight-bg-hover);
 		text-decoration-thickness: 2px;
 	}
 

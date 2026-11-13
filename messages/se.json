@@ -59,6 +59,8 @@
 	"ingHand": "Handskriven kod",
 	"ingHandOldAmt": "all",
 	"ingHandAmt": "de kluriga bitarna",
+	"ingWas": "förut",
+	"ingNow": "nu",
 	"ingredientsNote": "mindre av det nu",
 	"methodTitle": "Gör så här",
 	"step1": "Börja 2012 med en stadig bas av C#.",
@@ -139,6 +141,8 @@
 	"orderTitle": "Vill du ha en portion?",
 	"orderLine": "Beställ via mejl eller LinkedIn. Nygjord i Örebro.",
 	"linkedIn": "LinkedIn",
+	"contactEmail": "simon@codebysimon.com",
+	"contactLinkedIn": "linkedin.com/in/simon-adrell",
 	"signature": "Simon",
 	"footerLine": "Skrivet i Örebro, mellan två löprundor."
 }

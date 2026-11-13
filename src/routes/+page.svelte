@@ -71,9 +71,11 @@
 					{#each ingredients as it (it.name)}
 						<li class="ing">
 							<span>{it.name()}</span><span class="ing-tail"
-								><span class="ing-dots" aria-hidden="true"></span><span class="sr">:</span>
+								><span class="ing-dots" aria-hidden="true"></span><span class="sr-only">:</span>
 								<span class="ing-amt"
-									>{#if it.was}<s>{it.was()}</s>
+									>{#if it.was}<span class="sr-only">{`${m.ingWas()} `}</span><s>{it.was()}</s><span
+											class="sr-only">{` ${m.ingNow()} `}</span
+										>
 									{/if}{it.amount()}</span
 								></span
 							>
@@ -181,7 +183,7 @@
 				<p class="muted body">{m.orderLine()}</p>
 			</div>
 			<div class="actions">
-				<a class="cbs-btn cbs-btn-highlight" href="mailto:simon@codebysimon.com"
+				<a class="cbs-btn cbs-btn-highlight" href="mailto:{m.contactEmail()}"
 					><span class="cbs-btn-icon"
 						><svg
 							viewBox="0 0 24 24"
@@ -196,11 +198,9 @@
 						></span
 					>{m.ctaStart()}</a
 				>
-				<a class="cbs-btn cbs-btn-ghost" href="https://www.linkedin.com/in/simon-adrell"
-					>{m.linkedIn()}</a
-				>
+				<a class="cbs-btn cbs-btn-ghost" href="https://www.{m.contactLinkedIn()}">{m.linkedIn()}</a>
 			</div>
-			<p class="contact">simon@codebysimon.com · linkedin.com/in/simon-adrell</p>
+			<p class="contact">{m.contactEmail()} · {m.contactLinkedIn()}</p>
 			<span class="signature">{m.signature()}</span>
 		</section>
 	</article>
@@ -212,7 +212,7 @@
 			>{m.recipeTitleSite()}<span class="cbs-blaze" aria-hidden="true"></span></span
 		>
 		<p class="small muted">{m.footerLine()}</p>
-		<a class="cbs-link small target" href="mailto:simon@codebysimon.com">simon@codebysimon.com</a>
+		<a class="cbs-link small target" href="mailto:{m.contactEmail()}">{m.contactEmail()}</a>
 	</div>
 </footer>
 
@@ -227,15 +227,6 @@
 	dd,
 	figure {
 		margin: 0;
-	}
-	.sr {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0 0 0 0);
-		white-space: nowrap;
 	}
 	.page-x {
 		padding-left: var(--space-8);
@@ -568,13 +559,7 @@
 		padding-top: var(--space-8);
 		padding-bottom: var(--space-8);
 	}
-	.cbs-link:hover {
-		color: var(--button-highlight-bg-hover);
-	}
 	@media (max-width: 640px) {
-		:global(html) {
-			scroll-behavior: auto;
-		}
 		.page-x {
 			padding-left: var(--space-4);
 			padding-right: var(--space-4);

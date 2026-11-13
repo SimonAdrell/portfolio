@@ -59,6 +59,8 @@
 	"ingHand": "Hand-typed code",
 	"ingHandOldAmt": "all of it",
 	"ingHandAmt": "the tricky bits",
+	"ingWas": "was",
+	"ingNow": "now",
 	"ingredientsNote": "less of this now",
 	"methodTitle": "Method",
 	"step1": "Start in 2012 with a solid base of C#.",
@@ -139,6 +141,8 @@
 	"orderTitle": "Want a batch?",
 	"orderLine": "Orders by email or LinkedIn. Freshly made in Örebro.",
 	"linkedIn": "LinkedIn",
+	"contactEmail": "simon@codebysimon.com",
+	"contactLinkedIn": "linkedin.com/in/simon-adrell",
 	"signature": "Simon",
 	"footerLine": "Written in Örebro, between two runs."
 }
