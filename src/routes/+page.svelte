@@ -22,13 +22,17 @@
 </svelte:head>
 
 <header class="page-x bar">
-	<a href="#top" class="cbs-wordmark cbs-wordmark-md home" aria-label={m.recipeWordmarkLabel()}
+	<a
+		data-no-translate
+		href="#top"
+		class="cbs-wordmark cbs-wordmark-md home"
+		aria-label={m.recipeWordmarkLabel()}
 		>{m.recipeTitleSite()}<span class="cbs-blaze" aria-hidden="true"></span></a
 	>
 	<nav aria-label={m.recipeNavLabel()}>
 		<ul class="nav-list">
 			{#each nav as item (item.href)}
-				<li><a class="nav-link" href={item.href}>{item.text()}</a></li>
+				<li><a class="nav-link" data-no-translate href={item.href}>{item.text()}</a></li>
 			{/each}
 		</ul>
 	</nav>

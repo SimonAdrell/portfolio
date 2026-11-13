@@ -56,15 +56,19 @@ for (const locale of locales) {
 
 	test(`recipe nav scrolls to its section (${name})`, async ({ page }) => {
 		await page.setViewportSize({ width: 1280, height: 800 });
-		await page.goto(`./${locale}`);
+		// The canonical URLs (sitemap): / and /se. A link must scroll this document, not load another.
+		const path = `/${locale.replace('/', '')}`;
+		await page.goto(`.${path}`);
+		await page.evaluate(() => ((window as unknown as { stay: boolean }).stay = true));
 		const links = page.getByRole('navigation').getByRole('link');
 		await expect(links).toHaveCount(5);
 		for (const link of await links.all()) {
 			const hash = (await link.getAttribute('href'))?.match(/#[\w-]+$/)?.[0] ?? '';
 			expect(hash).not.toBe('');
 			await link.click();
-			await expect(page).toHaveURL(new RegExp(`:4173/${locale.replace('/', '')}/?${hash}$`));
+			await expect(page).toHaveURL(`http://localhost:4173${path}${hash}`);
 			await expect(page.locator(hash)).toBeInViewport();
+			expect(await page.evaluate(() => (window as unknown as { stay?: boolean }).stay)).toBe(true);
 		}
 	});
 
