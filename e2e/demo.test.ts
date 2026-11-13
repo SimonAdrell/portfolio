@@ -284,17 +284,18 @@ for (const locale of locales) {
 	});
 }
 
-test('internal links on the Swedish pages stay Swedish', async ({ page }) => {
-	for (const path of ['./sv/', './sv/does-not-exist']) {
-		await page.goto(path);
-		const hrefs = await page
-			.locator('a[href]')
-			.evaluateAll((all) => all.map((a) => a.getAttribute('href') ?? ''));
-		const internal = hrefs.filter((h) => !/^(mailto:|https?:)/.test(h));
-		expect(internal.length, path).toBeGreaterThan(0);
-		for (const href of internal) {
-			expect(href.startsWith('#') || /^\/sv(\/|$)/.test(href), `${path}: ${href}`).toBe(true);
-		}
+// Only the start page: on GitHub Pages every unknown URL gets the English 404.html, which preview does not mimic.
+test('internal links on the Swedish start page stay Swedish', async ({ page }) => {
+	await page.goto('./sv/');
+	const hrefs = await page
+		.locator('a[href]')
+		.evaluateAll((all) => all.map((a) => (a as HTMLAnchorElement).href));
+	const site = hrefs
+		.map((h) => new URL(h))
+		.filter((u) => ['localhost:4173', 'codebysimon.com', 'www.codebysimon.com'].includes(u.host));
+	expect(site.length).toBeGreaterThan(0);
+	for (const url of site) {
+		expect(url.pathname, url.href).toMatch(/^\/sv(\/|$)/);
 	}
 });
 

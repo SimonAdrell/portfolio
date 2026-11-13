@@ -10,9 +10,7 @@ export default defineConfig({
 			// No fallback: src/routes/404 prerenders a real 404.html, which GitHub Pages serves for unknown paths.
 			adapter: adapter(),
 			// Absolute asset URLs, since 404.html is served at any depth. origin: absolute hreflang URLs.
-			paths: { relative: false, origin: 'https://codebysimon.com' },
-			// /sv is only linked from hreflang tags, which the crawler skips.
-			prerender: { entries: ['*', '/sv/'] }
+			paths: { relative: false, origin: 'https://codebysimon.com' }
 		}),
 		paraglideVitePlugin({
 			project: './project.inlang',
