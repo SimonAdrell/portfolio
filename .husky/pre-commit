@@ -1,0 +1,15 @@
+# Staged files only. Typecheck and tests stay in npm run verify and CI.
+# Prettier and ESLint read files on disk, so refuse when a staged file also has
+# unstaged changes (edited or deleted after git add): disk would not match the commit.
+partial=$(git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -r git diff --name-only --)
+if [ -n "$partial" ]; then
+	echo "These staged files also have unstaged changes. Stage or stash them, then commit again:"
+	echo "$partial"
+	exit 1
+fi
+
+# Run both checks so one commit attempt shows every error.
+status=0
+git diff --cached --name-only --diff-filter=ACMR -z | xargs -0 -r prettier --check --ignore-unknown || status=1
+git diff --cached --name-only --diff-filter=ACMR -z -- '*.ts' '*.js' '*.mjs' '*.cjs' '*.svelte' | xargs -0 -r eslint --cache --max-warnings 0 --no-warn-ignored || status=1
+exit $status
