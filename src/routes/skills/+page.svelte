@@ -7,10 +7,10 @@
 </script>
 
 <div
-	class="mb-7 flex h-[30rem] w-full items-center justify-center bg-gray-900 bg-opacity-50 bg-[url('$lib/assets/workingHands.jpeg')] bg-cover bg-center md:mb-0 md:h-[36rem]"
+	class="mb-7 flex h-120 w-full items-center justify-center bg-gray-900/50 bg-[url('$lib/assets/workingHands.jpeg')] bg-cover bg-center md:mb-0 md:h-144"
 >
-	<header class="flex h-full w-full flex-col items-center justify-center bg-gray-900 bg-opacity-50">
-		<div class=" text-12xl pb-10 text-center text-7xl font-thin text-orange">
+	<header class="flex h-full w-full flex-col items-center justify-center bg-gray-900/50">
+		<div class=" pb-10 text-center text-7xl font-thin text-orange">
 			<TypingAnimation typingTexts={[m.mySkills()]}></TypingAnimation>
 		</div>
 		<div class="text-center text-4xl text-orange">
@@ -29,14 +29,14 @@
 				So, what's my history?
 			</h1>
 			<div
-				class="mt-12 block rounded-lg border border-gray-200 bg-accent p-6 text-lg font-light text-tertiary shadow dark:border-gray-700 dark:bg-accentDark dark:text-secondaryDark"
+				class="mt-12 block rounded-lg border border-gray-200 bg-accent p-6 text-lg font-light text-tertiary shadow-sm dark:border-gray-700 dark:bg-accentDark dark:text-secondaryDark"
 			>
 				<div class="flex-row md:flex">
 					<div class="flex-1 justify-center md:p-5">
 						<img
 							src={handsImg}
 							alt="Keyboard and hands on desk with blurry background"
-							class="h-4/4 rounded-xl"
+							class="rounded-xl"
 						/>
 					</div>
 					<div class="flex-1 md:p-5">
@@ -83,103 +83,103 @@
 				</h2>
 				<div class="mt-4 flex flex-wrap gap-2">
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>.Net Core</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>.NET</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>C#</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Entity Framework</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Azure blob storage</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Azure Service Bus</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Azure DevOps</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Docker</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Elasticsearch</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>React.js</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>React Native</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Svelte</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>SvelteKit</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>HTML</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>JSON</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Scrum</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>SQL</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Vs Code</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Visual Studio</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>Terraform</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>SSRS</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>SSIS</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>SSAS</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>GIT</span
 					>
 					<span
-						class="transform rounded bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
+						class="transform rounded-sm bg-tertiary px-5 py-2 text-sm font-medium text-primary transition duration-300 ease-in-out hover:bg-primary hover:text-tertiary dark:text-secondaryDark"
 						>GraphQL</span
 					>
 				</div>

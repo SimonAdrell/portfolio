@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<h1
-				class=" lg:text-10xl w-screen p-6 text-center text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
+				class=" w-screen p-6 text-center text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
 			>
 				{status}
 				{message}

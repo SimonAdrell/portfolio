@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<h1
-				class=" lg:text-10xl w-screen text-center font-SimonsHandwriting text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
+				class=" w-screen text-center font-SimonsHandwriting text-8xl text-tertiary md:text-9xl dark:text-tertiaryDark"
 			>
 				Code By Simon
 			</h1>
