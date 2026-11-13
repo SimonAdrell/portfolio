@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const build = resolve(import.meta.dirname, '../build');
@@ -220,6 +220,24 @@ test('both start pages are prerendered with their content', () => {
 	expect(readFileSync(resolve(build, 'index.html'), 'utf8')).toContain(`>Simon's gel</h1>`);
 	expect(readFileSync(resolve(build, 'se.html'), 'utf8')).toContain('>Simons gel</h1>');
 	expect(existsSync(resolve(build, '404.html'))).toBe(true);
+});
+
+// Missing #id targets already fail the build (SvelteKit prerender handleMissingId).
+test('in-page links stay on the page', () => {
+	const pages = readdirSync(build, { recursive: true, encoding: 'utf8' }).filter((f) =>
+		f.endsWith('.html')
+	);
+	expect(pages.length).toBeGreaterThan(0);
+	for (const file of pages) {
+		const html = readFileSync(resolve(build, file), 'utf8');
+		for (const [, href] of html.matchAll(/<a\s[^>]*href="([^"]*#[^"]*)"/g)) {
+			const id = href.slice(href.indexOf('#') + 1);
+			expect(
+				href.startsWith('#'),
+				`${file}: link "${href}" leaves the page. Write href="#${id}" and add data-no-translate, or Paraglide rewrites it to a page path.`
+			).toBe(true);
+		}
+	}
 });
 
 test('start pages ship no JavaScript', () => {
