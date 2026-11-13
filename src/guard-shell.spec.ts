@@ -15,7 +15,11 @@ describe('guard-shell', () => {
 		'git commit --no-verify -m "wip"',
 		'git push --no-verify',
 		'npm run lint && git commit --no-verify',
-		'git commit --no-verify -m ".env.example"'
+		'git commit --no-verify -m ".env.example"',
+		'git commit -m "$(cat <<\'EOF\'\nFix\nEOF\n)" --no-verify',
+		"git commit -m @'\nFix\n'@ --no-verify",
+		'git commit -m x \\\n  --no-verify',
+		'git commit -m "a & b" --no-verify'
 	])('blocks skipping git hooks: %s', (cmd) => {
 		const r = guard(cmd);
 		expect(r.blocked).toBe(true);

@@ -12,9 +12,10 @@ try {
 // Match in command position so text that only mentions a command (PR bodies, echo) passes.
 const CMD = String.raw`(?:^|[;&|(\n]\s*)`;
 const RULES = [
-	// shortcut: `git commit -m "... --no-verify ..."` also blocks; reword the message.
+	// Scans to the end, so the flag after a heredoc, a multi-line or `a & b` message still counts.
+	// shortcut: a git command whose message or any later part mentions --no-verify also blocks; reword it.
 	[
-		new RegExp(String.raw`${CMD}git\b[^|;&\n]*\s--no-verify\b`, 'i'),
+		new RegExp(String.raw`${CMD}git\b[\s\S]*\s--no-verify\b`, 'i'),
 		'Never skip git hooks. Fix what the hook reports.'
 	],
 	[
