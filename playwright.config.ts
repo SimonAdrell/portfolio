@@ -10,6 +10,7 @@ export default defineConfig({
 		// Never reuse: a stale preview on 4173 would test an old build without saying so.
 		reuseExistingServer: false
 	},
-	use: { baseURL: 'http://localhost:4173/' },
+	// CI uploads test-results/ when e2e fails; the trace is what makes it worth opening.
+	use: { baseURL: 'http://localhost:4173/', trace: 'retain-on-failure' },
 	testDir: 'e2e'
 });
