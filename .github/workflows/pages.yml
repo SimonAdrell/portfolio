@@ -11,10 +11,10 @@ on:
 permissions:
   contents: read
 
-# One queue per branch: pull requests don't wait on deploys, and main deploys in push order.
+# One queue per branch: a new PR push cancels its stale run, main deploys in push order.
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # The ruleset requires this job by its id: keep it named `checks`.
@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 22
@@ -30,15 +32,21 @@ jobs:
       - run: npx playwright install --with-deps chromium
       # Before verify: its build writes src/lib/paraglide, which svelte-check needs.
       - run: npm run test:e2e
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-results
+          path: test-results/
       - run: npm run verify
-      - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      # Pull request runs have ref refs/pull/N/merge, so this also skips them.
+      - if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v5
         with:
           path: build
 
   deploy:
     needs: checks
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write
