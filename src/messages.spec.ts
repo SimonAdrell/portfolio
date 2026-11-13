@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import en from '../messages/en.json';
-import se from '../messages/se.json';
+import sv from '../messages/sv.json';
 
 const keys = (m: Record<string, string>) => Object.keys(m).filter((k) => k !== '$schema');
 
@@ -42,14 +42,14 @@ const sameInBoth = new Set([
 
 describe('messages', () => {
 	it('English and Swedish have the same keys', () => {
-		expect(keys(se).sort()).toEqual(keys(en).sort());
+		expect(keys(sv).sort()).toEqual(keys(en).sort());
 	});
 
 	it('every Swedish text is translated', () => {
 		const untranslated = keys(en).filter(
 			(k) =>
 				!sameInBoth.has(k) &&
-				(en as Record<string, string>)[k] === (se as Record<string, string>)[k]
+				(en as Record<string, string>)[k] === (sv as Record<string, string>)[k]
 		);
 		expect(untranslated).toEqual([]);
 	});

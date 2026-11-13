@@ -1,16 +1,24 @@
-import { paraglide } from '@inlang/paraglide-sveltekit/vite';
+import adapter from '@sveltejs/adapter-static';
+import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
-		sveltekit(),
-		paraglide({
+		sveltekit({
+			// No fallback: src/routes/404 prerenders a real 404.html, which GitHub Pages serves for unknown paths.
+			adapter: adapter(),
+			// Absolute asset URLs, since 404.html is served at any depth. origin: absolute hreflang URLs.
+			paths: { relative: false, origin: 'https://codebysimon.com' },
+			// /sv is only linked from hreflang tags, which the crawler skips.
+			prerender: { entries: ['*', '/sv/'] }
+		}),
+		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
-			// Registered in svelte.config.js instead; see the note there.
-			disablePreprocessor: true
+			// English at /, Swedish at /sv/.
+			strategy: ['url', 'baseLocale']
 		})
 	],
 	// No PostCSS; stops Vite finding a parent checkout's config from inside .claude/worktrees.

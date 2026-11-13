@@ -2,6 +2,9 @@
 	"name": "portfolio",
 	"version": "0.0.1",
 	"type": "module",
+	"imports": {
+		"#lib/*": "./src/lib/*"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -17,9 +20,10 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@inlang/paraglide-js": "^3.2.2",
 		"@playwright/test": "^1.65.0",
-		"@sveltejs/adapter-static": "^3.0.11",
-		"@sveltejs/kit": "^2.70.4",
+		"@sveltejs/adapter-static": "^4.0.1",
+		"@sveltejs/kit": "^3.2.0",
 		"@sveltejs/vite-plugin-svelte": "^7.3.1",
 		"@tailwindcss/vite": "^4.3.5",
 		"eslint": "^10.14.0",
@@ -38,8 +42,6 @@
 		"vitest": "^5.1.0"
 	},
 	"dependencies": {
-		"@inlang/paraglide-sveltekit": "^0.11.1",
-		"@inlang/paraglide-vite": "^1.2.76",
 		"@lucide/svelte": "^1.72.0"
 	}
 }

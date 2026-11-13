@@ -39,3 +39,6 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 sendgrid.env
+
+# Paraglide compiles these from messages/ on every build.
+/src/lib/paraglide

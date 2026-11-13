@@ -1,7 +1,9 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages';
-	import keyboard from '$lib/assets/workingHands.webp';
-	import { agents, batches, facts, howIBuild, ingredients, nutrition, steps } from '$lib/recipe';
+	import { page } from '$app/state';
+	import * as m from '#lib/paraglide/messages.js';
+	import { localizeHref, locales } from '#lib/paraglide/runtime.js';
+	import keyboard from '#lib/assets/workingHands.webp';
+	import { agents, batches, facts, howIBuild, ingredients, nutrition, steps } from '#lib/recipe.ts';
 
 	const nav = [
 		{ href: '#ingredients', text: m.navIngredients },
@@ -19,20 +21,23 @@
 <svelte:head>
 	<title>{m.recipeMetaTitle()}</title>
 	<meta name="description" content={m.recipeMetaDescription()} />
+	{#each locales as locale (locale)}
+		<link
+			rel="alternate"
+			hreflang={locale}
+			href={new URL(localizeHref('/', { locale }), page.url.origin).href}
+		/>
+	{/each}
 </svelte:head>
 
 <header class="page-x bar">
-	<a
-		data-no-translate
-		href="#top"
-		class="cbs-wordmark cbs-wordmark-md home"
-		aria-label={m.recipeWordmarkLabel()}
+	<a href="#top" class="cbs-wordmark cbs-wordmark-md home" aria-label={m.recipeWordmarkLabel()}
 		>{m.recipeTitleSite()}<span class="cbs-blaze" aria-hidden="true"></span></a
 	>
 	<nav aria-label={m.recipeNavLabel()}>
 		<ul class="nav-list">
 			{#each nav as item (item.href)}
-				<li><a class="nav-link" data-no-translate href={item.href}>{item.text()}</a></li>
+				<li><a class="nav-link" href={item.href}>{item.text()}</a></li>
 			{/each}
 		</ul>
 	</nav>

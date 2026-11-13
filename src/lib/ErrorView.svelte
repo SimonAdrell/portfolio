@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import mysadfaceSvg from '$lib/assets/sadFace.png';
+	import mysadfaceSvg from '#lib/assets/sadFace.png';
 	import { Send } from '@lucide/svelte';
-	import * as m from '$lib/paraglide/messages';
+	import * as m from '#lib/paraglide/messages.js';
+	import { localizeHref } from '#lib/paraglide/runtime.js';
+
+	// /sv/ is still route '/' (reroute in hooks.ts strips the locale), hence the cast.
+	const home = resolve(localizeHref('/') as '/');
 
 	let { status, message }: { status: number; message?: string } = $props();
 </script>
@@ -22,7 +26,7 @@
 			{message}
 		</h1>
 		<div class="flex justify-center text-2xl">
-			<a href={resolve('/')} class="flex min-h-11 items-center rounded-2xl bg-accent p-3">
+			<a href={home} class="flex min-h-11 items-center rounded-2xl bg-accent p-3">
 				<Send aria-hidden="true"></Send>
 				<span class="pl-3">{m.notFoundBack()}</span>
 			</a>
