@@ -1,0 +1,11 @@
+{
+	"$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
+	"entry": [".claude/hooks/*.mjs"],
+	// package.json "imports" (#lib/*) makes every src/lib file an entry; without this their unused exports pass.
+	"includeEntryExports": true,
+	// Paraglide compiles src/lib/paraglide (gitignored) during vite and vitest runs, so it may not exist yet.
+	"ignoreUnresolved": ["^#lib/paraglide/"],
+	// "extends": "$app/tsconfig" is SvelteKit 3's own alias, not a package. ignoreDependencies can't match a
+	// $ name, so this is the narrowest option; it also hides any other unlisted package named in tsconfig.json.
+	"ignoreIssues": { "tsconfig.json": ["unlisted"] }
+}

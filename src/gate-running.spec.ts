@@ -11,6 +11,7 @@ describe('isGate', () => {
 		`${node} ${nm}\\svelte-check\\bin\\svelte-check --tsconfig ./tsconfig.json`,
 		`${node} ${nm}\\eslint\\bin\\eslint.js .`,
 		`${node} ${nm}\\prettier\\bin\\prettier.cjs --check .`,
+		`${node} ${nm}\\knip\\bin\\knip.js`,
 		`${node} ${nm}\\@playwright\\test\\cli.js test`,
 		`${node} ${nm}\\vitest\\vitest.mjs --run`,
 		`${node} ${nm}\\vitest\\vitest.mjs run src/x.spec.ts`,

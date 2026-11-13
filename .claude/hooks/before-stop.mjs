@@ -83,7 +83,9 @@ function codeChanged() {
 		return status
 			.split('\n')
 			.some((l) =>
-				/\s(src|e2e|messages|scripts)\/|\spackage\.json$|\.(ts|js|mjs|cjs|svelte|css)$/.test(l)
+				/\s(src|e2e|messages|scripts)\/|\s(package\.json|knip\.jsonc)$|\.(ts|js|mjs|cjs|svelte|css)$/.test(
+					l
+				)
 			);
 	} catch {
 		return true;
