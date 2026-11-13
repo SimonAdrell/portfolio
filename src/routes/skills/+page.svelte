@@ -10,7 +10,7 @@
 	class="mb-7 flex h-120 w-full items-center justify-center bg-gray-900/50 bg-[url('$lib/assets/workingHands.jpeg')] bg-cover bg-center md:mb-0 md:h-144"
 >
 	<header class="flex h-full w-full flex-col items-center justify-center bg-gray-900/50">
-		<div class=" text-12xl pb-10 text-center text-7xl font-thin text-orange">
+		<div class=" pb-10 text-center text-7xl font-thin text-orange">
 			<TypingAnimation typingTexts={[m.mySkills()]}></TypingAnimation>
 		</div>
 		<div class="text-center text-4xl text-orange">

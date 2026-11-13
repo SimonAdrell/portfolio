@@ -28,7 +28,7 @@
 							<div>
 								<a
 									href={resolve(option.href)}
-									class=" pt-2 text-xl text-secondary underline-offset-1 transition-all duration-100 hover:pt-4 hover:text-tertiary aria-current:text-2xl aria-current:text-tertiary dark:text-secondaryDark hover:dark:text-tertiaryDark aria-[current=trye]:dark:text-tertiaryDark"
+									class=" pt-2 text-xl text-secondary underline-offset-1 transition-all duration-100 hover:pt-4 hover:text-tertiary aria-current:text-2xl aria-current:text-tertiary dark:text-secondaryDark hover:dark:text-tertiaryDark"
 									aria-current={page.url.pathname === resolve(option.href)}>{option.page}</a
 								>
 							</div>

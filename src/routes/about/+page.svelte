@@ -52,7 +52,7 @@
 
 <div class=" ">
 	<main class="">
-		<div class="py mx-auto max-w-(--breakpoint-xl) lg:py-16">
+		<div class="mx-auto max-w-(--breakpoint-xl) lg:py-16">
 			<div class=" text-xl text-secondary dark:text-secondaryDark">
 				<div class="  flex-row md:flex">
 					<div class="flex flex-1 justify-center p-12">
