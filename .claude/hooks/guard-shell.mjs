@@ -1,5 +1,6 @@
-// Runs before every shell command. Blocks reading secret env files and printing env secrets.
-// Stops accidents, not a security boundary. Exit 2 blocks the command and tells Claude why.
+// Runs before every shell command. Blocks skipping git hooks, running dotenv, reading secret env files
+// and printing env secrets. Stops accidents, not a security boundary. Exit 2 blocks the command and tells Claude why.
+// Tests: src/guard-shell.spec.ts.
 let command;
 try {
 	command = String(JSON.parse(await readStdin())?.tool_input?.command ?? '');
@@ -7,11 +8,23 @@ try {
 	block('could not read the command, so it was not checked.');
 }
 
+// A command starts at the beginning of the line or after ; & | ( or a newline.
+// Match in command position so text that only mentions a command (PR bodies, echo) passes.
 const CMD = String.raw`(?:^|[;&|(\n]\s*)`;
 const RULES = [
+	// shortcut: `git commit -m "... --no-verify ..."` also blocks; reword the message.
+	[
+		new RegExp(String.raw`${CMD}git\b[^|;&\n]*\s--no-verify\b`, 'i'),
+		'Never skip git hooks. Fix what the hook reports.'
+	],
+	[
+		new RegExp(String.raw`${CMD}(npx\s+|npm\s+exec\s+|\S*[/\\])?dotenv\b`, 'i'),
+		'Running dotenv directly can print secrets.'
+	],
 	[
 		/(^|[\s'"`=/\\<>(:])(\.env(\.[\w-]+)?|sendgrid\.env)(?![\w.-])/i,
-		'Secret env files are off limits. Use the *.example files.'
+		'Secret env files are off limits. Use the *.example files.',
+		/\.env\.example/
 	],
 	[
 		new RegExp(
@@ -22,8 +35,8 @@ const RULES = [
 	]
 ];
 
-for (const [pattern, reason] of RULES)
-	if (pattern.test(command) && !/\.env\.example/.test(command)) block(reason);
+for (const [pattern, reason, allow] of RULES)
+	if (pattern.test(command) && !allow?.test(command)) block(reason);
 
 function block(reason) {
 	process.stderr.write(`Blocked by .claude/hooks/guard-shell.mjs: ${reason}`);
