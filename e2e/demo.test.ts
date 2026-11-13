@@ -240,6 +240,35 @@ test('in-page links stay on the page', () => {
 	}
 });
 
+// vite preview is lenient (/sv/ serves sv.html); GitHub Pages is not. Check links against build/ the way Pages resolves them.
+test('every site link has a file GitHub Pages can serve', () => {
+	const site = 'https://codebysimon.com';
+	const pages = readdirSync(build, { recursive: true, encoding: 'utf8' })
+		.map((f) => f.replaceAll('\\', '/'))
+		.filter((f) => f.endsWith('.html'));
+	for (const file of pages) {
+		const html = readFileSync(resolve(build, file), 'utf8');
+		const base = `${site}/${file.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '')}`;
+		const tags = html.match(/<(a|link)\s[^>]*>/g) ?? [];
+		for (const tag of tags) {
+			if (tag.startsWith('<link') && !/rel="alternate"/.test(tag)) continue;
+			const href = tag.match(/href="([^"]*)"/)?.[1];
+			if (!href || href.startsWith('#')) continue;
+			const url = new URL(href, base);
+			if (!['codebysimon.com', 'www.codebysimon.com'].includes(url.host)) continue;
+			const path = decodeURIComponent(url.pathname).slice(1);
+			const candidates =
+				path === '' || path.endsWith('/')
+					? [`${path}index.html`]
+					: [path, `${path}.html`, `${path}/index.html`];
+			expect(
+				candidates.some((c) => existsSync(resolve(build, c))),
+				`${file}: link "${href}" has no file in build/ (GitHub Pages looks for ${candidates.join(' or ')}). Point the link at a built page, or make the route build there (e.g. trailingSlash = 'always' in its +page.ts).`
+			).toBe(true);
+		}
+	}
+});
+
 test('start pages ship no JavaScript', () => {
 	for (const f of ['index.html', 'sv/index.html']) {
 		const html = readFileSync(resolve(build, f), 'utf8');
